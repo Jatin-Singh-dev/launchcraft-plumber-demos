@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Sites Directory</title>
+    <style>
+        body { font-family: system-ui; max-width: 800px; margin: 40px auto; padding: 0 20px; background: #f4f4f4; }
+        h1 { text-align: center; color: #333; }
+        input { width: 100%; padding: 15px; font-size: 1.1rem; margin-bottom: 30px; border: 1px solid #ddd; border-radius: 5px; box-sizing:border-box; }
+        .list { display: grid; gap: 15px; }
+        .item { background: #fff; padding: 20px; border-radius: 8px; text-decoration: none; color: #333; display: block; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .item h3 { margin: 0 0 5px; color: #0f3d2e; }
+        .item p { margin: 0; color: #666; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <h1>Generated Plumbing Sites</h1>
+    <input type="text" id="search" placeholder="Search businesses..." onkeyup="filter()">
+    <div class="list" id="list">
+        <a href="andersen-and-prowse-services/index.html" class="item"><h3>Andersen & Prowse Services</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="micheal-and-sons-plumbing/index.html" class="item"><h3>Micheal & Sons Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="javier-and-sons-plumbers/index.html" class="item"><h3>Javier & Sons Plumbers</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="mcg-krush-plumbing-solutions/index.html" class="item"><h3>McG Krush Plumbing Solutions</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="kutting-edge-renovation-and-repair/index.html" class="item"><h3>Kutting Edge Renovation and Repair</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="cedar-hill-ac-repair-pros/index.html" class="item"><h3>Cedar Hill AC Repair Pros</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="plumber-dude-s/index.html" class="item"><h3>Plumber Dude's</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="river-valley-plumbing-solution/index.html" class="item"><h3>River Valley Plumbing Solution</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="metroflow-plumbing-grand-prairie/index.html" class="item"><h3>MetroFlow Plumbing Grand Prairie</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="paul-j-plumbing-llc/index.html" class="item"><h3>Paul J Plumbing LLC</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="villarreal-plumbing-inc/index.html" class="item"><h3>Villarreal Plumbing Inc</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="alert-drain-and-sewer/index.html" class="item"><h3>Alert Drain & Sewer</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="a-plumbing/index.html" class="item"><h3>A+ Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="poseidon-s-plumbing-llc/index.html" class="item"><h3>Poseidon's Plumbing, LLC</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="dfw-elite-plumbing-professionals-llc/index.html" class="item"><h3>DFW Elite Plumbing Professionals, LLC</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="k-o-plumbing/index.html" class="item"><h3>K O Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="ameratex-plumbing-llc/index.html" class="item"><h3>AmeraTex Plumbing LLC</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="ramji-plumber/index.html" class="item"><h3>Ramji plumber</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="precise-h2o-plumbing/index.html" class="item"><h3>Precise h2o plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="goodwater-rsv-plumbing-services/index.html" class="item"><h3>GoodWater RSV & Plumbing Services</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="true-line-plumbing-services/index.html" class="item"><h3>True Line Plumbing Services</h3><p>Dallas–Fort Worth, TX</p></a>
+<a href="texas-total-plumbing-llc/index.html" class="item"><h3>Texas Total Plumbing LLC</h3><p>Dallas–Fort Worth, TX</p></a>
+
+    </div>
+    <script>
+        function filter() {
+            const q = document.getElementById('search').value.toLowerCase();
+            document.querySelectorAll('.item').forEach(el => {
+                el.style.display = el.innerText.toLowerCase().includes(q) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

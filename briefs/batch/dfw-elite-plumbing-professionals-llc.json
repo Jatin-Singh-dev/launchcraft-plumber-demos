@@ -1,0 +1,27 @@
+{
+  "slug": "dfw-elite-plumbing-professionals-llc",
+  "business_name": "DFW Elite Plumbing Professionals, LLC",
+  "industry": "Plumbing",
+  "location": "Dallas\u2013Fort Worth, TX",
+  "primary_goal": "calls",
+  "offer": "Same-day service. Upfront pricing. No surprises.",
+  "phone": "+1 972-365-6953",
+  "services": [
+    "Emergency Plumbing",
+    "Drain Cleaning",
+    "Leak Repair",
+    "Water Heater Repair",
+    "Toilet & Faucet Repair",
+    "Pipe Replacement"
+  ],
+  "brand": {
+    "primary_color": "#0f3d2e",
+    "accent_color": "#a8ff2a"
+  },
+  "images": {
+    "hero": "assets/hero.webp",
+    "team": "assets/team.webp",
+    "before_after_1": "assets/before-after-1.webp",
+    "before_after_2": "assets/before-after-2.webp"
+  }
+}

@@ -1,10 +1,10 @@
 ---
 name: generate-landing-page-html
-description: Generate an ultra-fast, high-converting blue-collar (plumber/HVAC/electrician) single-file landing page from /briefs/*.json in LaunchCraft style, with image support, sticky click-to-call, map, FAQ, and short quote form.
+description: Generate ultra-fast, high-converting blue-collar single-file landing pages from /briefs/*.json in LaunchCraft style. Includes proper mobile sticky call bar, trust, map, FAQ, short quote form, image support, and directory index.
 ---
 
 # PRIMARY GOAL
-Create a FAST (<2s mobile), mobile-first landing page that maximises PHONE CALLS and quote requests for blue-collar local service businesses (plumbers, HVAC, electricians). This must feel like a proven converting local service site: big phone, urgency, trust, and frictionless contact.
+Create FAST (<2s mobile), mobile-first landing pages that maximise PHONE CALLS and quote requests for local blue-collar service businesses (plumbing/HVAC/electrician). Must feel like a proven converting local service site: big phone, urgency, trust, and frictionless contact.
 
 # INPUT (JSON)
 Path: /briefs/<slug>.json
@@ -15,275 +15,218 @@ Path: /briefs/<slug>.json
 - industry (string) e.g. "Plumbing"
 - location (string) e.g. "Austin, TX"
 - primary_goal (string) e.g. "calls"
-- offer (string)
-- phone (string)
-- services (array of strings OR array of objects)
+- offer (string) short promise/offer
+- phone (string) phone number shown everywhere
+- services (array of strings OR array of objects with name/one_liner/price_hint)
 - brand.primary_color (hex)
 - brand.accent_color (hex)
 
-## SERVICES FORMAT
-services can be:
-
-Option A:
-["Emergency Plumbing", "Drain Cleaning"]
-
-Option B:
-[
-  { "name": "Emergency Plumbing", "one_liner": "Fast response", "price_hint": "From $99" }
-]
-
-Rules:
-- Show name always
-- Show one_liner if provided
-- price_hint optional
-- If more than 6 services → render best 6
-
 ## OPTIONAL FIELDS (HIGHLY RECOMMENDED)
-- rating
-- review_count
-- years_in_business
-- badges (array)
-- hours
-- service_areas (array)
-- emergency (boolean)
-- faq (array of {q,a})
-- testimonials (array of {name, area, text})
-- form.service_needed_options (array)
-- map.query (string)
-- map.embed_url (string)
+- rating (string/number) e.g. "4.9"
+- review_count (string/number) e.g. "47"
+- years_in_business (string) e.g. "10+"
+- badges (array of strings) e.g. ["Licensed & Insured", "Same-Day Service", "Upfront Pricing", "Warranty Included"]
+- hours (string) e.g. "Mon–Sat 8:00 AM – 6:00 PM"
+- service_areas (array of strings) e.g. ["Downtown", "Round Rock", ...]
+- emergency (boolean) if true emphasize emergency messaging
+- faq (array of {q,a}) up to 7 items
+- testimonials (array of {name, area, text}) 2–3 items
+- form.service_needed_options (array of strings) otherwise derive from services
+- map.query (string) e.g. "Plumber Austin TX" OR map.embed_url (string)
+- images (object with paths relative to site folder), e.g.:
+  {
+    "hero": "assets/hero.webp",
+    "team": "assets/team.webp",
+    "before_after_1": "assets/before-after-1.webp",
+    "before_after_2": "assets/before-after-2.webp"
+  }
 
-## IMAGES OBJECT (OPTIONAL)
-Paths relative to site folder:
+# HARD RULE: NO HALLUCINATED BUSINESS DATA
+- business_name MUST come from the brief only.
+- Do NOT invent owner names, founder names, license numbers, or company history not present in the brief.
+- Testimonials:
+  - If not provided, generate placeholders BUT do not use real-sounding identifiable names like “Andersen” etc.
+  - Use neutral first names only: “Chris”, “Taylor”, “Jordan”, “Sam”, “Alex” + area. (No last names.)
 
-{
-  "hero": "assets/hero.webp",
-  "team": "assets/team.webp",
-  "before_after_1": "assets/before-after-1.webp",
-  "before_after_2": "assets/before-after-2.webp"
-}
+# OUTPUT (FILES/FOLDERS TO CREATE)
+Create: /sites/<slug>/
+- index.html  (SINGLE FILE, inline CSS, minimal JS only if needed for FAQ toggle and form success message)
+- README.md   (preview/deploy instructions)
+- assets/     (ALWAYS create this folder even if empty)
 
-# OUTPUT (FILES/FOLDERS)
-Create:
-
-/sites/<slug>/
-- index.html
-- README.md
-- assets/ (always)
+ALSO create a directory page at:
+- /sites/index.html  (lists links to all /sites/<slug>/ pages)
 
 # SPEED OPTIMISATION RULES (NON-NEGOTIABLE)
-- No frameworks
-- No external libraries
-- No jQuery
-- Inline CSS only
-- Minimal vanilla JS (FAQ + form success only)
-- System fonts only
-- No video
-- No sliders
+- NO frameworks, NO build steps
+- NO external libraries (no jQuery)
+- Plain HTML/CSS. Tiny vanilla JS allowed only for:
+  - FAQ accordion toggle
+  - form success message
+- Inline critical CSS in <style>
+- Use system fonts only (no Google Fonts)
+- Avoid heavy animations, popups, sliders, and video backgrounds
 - Images:
-  - WebP preferred
-  - Hero ≤1200px width
-  - <150KB target
-  - loading="lazy" except hero
+  - Prefer WebP
+  - Hero max 1200px width
+  - Target <150KB per image
+  - loading="lazy" for all non-hero images (hero can be eager)
   - decoding="async"
-  - width + height attributes
+  - Add width/height attributes when possible
 
-# CONVERSION BLUEPRINT
+# CONVERSION BLUEPRINT (MUST IMPLEMENT)
 
-## 1) STICKY CLICK-TO-CALL (ALWAYS)
-- Header phone link
-- Floating call button:
-  - Mobile bottom fixed
-  - Desktop bottom-right
-  - tel: link
-  - accent color
-  - ≥48px height
-- If emergency=true show "Emergency?"
+## 1) MOBILE STICKY CALL BAR (FIXED, NOT UGLY TEXT)
+Must exist ALWAYS and must look like a real product header.
 
-## 2) HERO
-H1:
-Professional <industry> in <location>
+- Fixed at top on mobile with:
+  - Left: business_name (brand text)
+  - Right: high-contrast call button "Call" + phone icon
+- Height >= 52px, tap targets >= 48px
+- Uses brand.accent_color for the button
+- Adds padding to body so content isn’t hidden behind it
 
-Subheadline:
-Licensed + Insured + years + Same-day
+Implementation requirement:
+- Use CSS media query so it shows on mobile and optionally becomes a FAB on desktop
+- Must include tel: link
+- Must NOT be plain "Call Now" text floating in the page
 
-3 bullets:
-- Fast response
-- Upfront pricing
-- Satisfaction guaranteed
+## 2) HEADER (DESKTOP / NORMAL)
+- Simple header with:
+  - business_name (logo text)
+  - nav anchors (Services, Reviews, Areas, FAQ, Quote)
+  - phone in header as tel link
 
-CTAs:
-- CALL NOW (tel)
-- GET FREE QUOTE (scroll)
+## 3) HERO ABOVE THE FOLD
+- H1: "Professional <industry> in <location>"
+- Subheadline includes: "Licensed & Insured" + years if provided + "Same-Day Service"
+- 3 short benefit bullets (fast response, upfront pricing, guarantee)
+- CTAs:
+  - Primary: CALL NOW (tel link)
+  - Secondary: GET FREE QUOTE (scroll to form section)
+- Hero image right (desktop) below text (mobile)
+- IMPORTANT: mobile hero top padding must be compact and not create a big empty block.
 
-Hero image right desktop / below mobile
-
-## 3) TRUST BAR
-4 chips:
+## 4) TRUST BAR
+Show 4 trust chips/cards:
 - Licensed & Insured
-- Same-day / Emergency
+- Same-Day / Emergency (if emergency=true)
 - Upfront Pricing
-- Satisfaction Guaranteed
+- Satisfaction Guarantee / Warranty
 
-Use badges if provided else defaults.
+## 5) SERVICES
+- 4–6 service cards max.
+- Each: icon/emoji, name, one-liner
+- If >6 given, choose the best 6.
 
-## 4) SERVICES
-4–6 cards
-Icon + name + one-liner
+## 6) SOCIAL PROOF
+- Show:
+  "<rating>★ from <review_count> Google Reviews"
+- If missing: default to "4.9★ from 50+ Google Reviews" (placeholder)
+- Testimonials:
+  - If brief provided, use them exactly.
+  - If missing: generate 2–3 short placeholders with neutral first names only (no last names).
 
-## 5) SOCIAL PROOF
-Rating line:
-<rating>★ from <review_count> Google Reviews
+## 7) SERVICE AREAS + MAP (REQUIRED)
+- List of areas served:
+  - Use service_areas if present
+  - Else "Serving <location> & surrounding areas"
+- Embedded map:
+  - Use map.embed_url if provided
+  - Else use:
+    src="https://www.google.com/maps?q=<ENCODED_QUERY>&output=embed"
+- iframe must be responsive and loading="lazy"
 
-Defaults:
-4.9★ from 50+ Google Reviews
+## 8) FAQ (REQUIRED)
+- 5–7 FAQs.
+- Use brief faq if provided else generate common ones.
+- Simple accordion:
+  - works without heavy JS
+  - tiny JS allowed
+  - default open: first item open on desktop, collapsed on mobile is fine
 
-2–3 testimonials (generate if missing)
+## 9) QUOTE FORM (REQUIRED, SHORT)
+- Must be visible and easy to find.
+- Required fields:
+  - Name (text)
+  - Phone (tel)
+  - Service Needed (select)
+- Optional: message textarea
+- Submit shows inline success message:
+  "Thanks! We’ll call you back within 10 minutes."
+- Repeat phone number near form for call-first users
+- No backend required by default (unless explicitly requested)
 
-## 6) SERVICE AREA + MAP (REQUIRED)
-Text:
-service_areas OR "Serving <location> & surrounding areas"
+## 10) FOOTER
+- Repeat: phone, hours, service area, trust text
+- Disclaimer:
+  "For emergencies, call immediately."
+- If years_in_business present, show it.
 
-Map iframe:
-If map.embed_url use it
-Else:
-https://www.google.com/maps?q=<encoded(query||location)>&output=embed
-
-Responsive + lazy loaded
-
-## 7) FAQ (REQUIRED)
-5–7 items
-
-Defaults:
-- Same-day service?
-- Licensed & insured?
-- Upfront pricing?
-- Areas served?
-- Emergencies?
-- How to get quote?
-
-Accordion:
-CSS + tiny JS allowed
-First open desktop ok
-
-## 8) QUOTE FORM (REQUIRED)
-Fields:
-- Name (required)
-- Phone (required)
-- Service Needed (select)
-
-Inline success:
-"Thanks! We’ll call you back within 10 minutes."
-
-Show phone near form.
-
-No backend.
-
-## 9) FOOTER
-Show:
-- business_name
-- phone
-- hours
-- service areas
-- trust text
-
-Include:
-"This is a demo site. For emergencies call immediately."
-
-# SEO REQUIREMENTS
+# SEO REQUIREMENTS (MUST IMPLEMENT)
+- <title> = "<industry> <location> | Same-Day Service | <business_name>"
+- meta description includes service + location + CTA + phone (150–160 chars)
 - One H1 only
-- H2 sections:
-  Services
-  Reviews
-  Service Areas
-  FAQ
-  Get a Free Quote
+- H2s: Services, Reviews, Service Areas, FAQ, Get a Free Quote
+- Image alt text includes service + location when appropriate
 
-Title:
-<industry> <location> | Same-Day Service | <business_name>
+## SCHEMA MARKUP (JSON-LD) REQUIRED
+Add LocalBusiness schema:
+- @type: "Plumber" if industry contains "plumb", else "LocalBusiness"
+- name, telephone, url (placeholder), addressLocality/Region from location if possible
+- openingHours (if hours provided, approximate)
+- areaServed (service_areas if present)
 
-Meta description:
-Include industry + location + CTA + phone
+# VISUAL STYLE (LaunchCraft)
+- Use brand.primary_color as deep primary background
+- Use brand.accent_color for CTAs/highlights
+- White/light cards/sections for contrast
+- Rounded corners, soft shadows
+- Bold, high-contrast typography
+- Clean spacing, scannable mobile layout
 
-Alt text:
-service + location
+# REQUIRED PAGE ORDER (STRICT)
+0) Mobile sticky call bar (fixed)
+1) Header
+2) Hero
+3) Trust bar
+4) Services grid
+5) Reviews/testimonials
+6) Service areas + map
+7) FAQ
+8) Quote form
+9) Footer
 
-# SCHEMA MARKUP (REQUIRED)
-JSON-LD LocalBusiness
+# IMAGE HANDLING (REQUIRED)
+- ALWAYS create /sites/<slug>/assets/
+- If images.* exists, render <img>
+- If missing, render a styled placeholder box:
+  "Add hero.webp to /assets"
 
-Rules:
-- type = Plumber if industry contains "plumb" else LocalBusiness
-- name
-- telephone
-- url placeholder
-- addressLocality + region from location
-- openingHours if provided
-- areaServed
+Standard filenames:
+- assets/hero.webp
+- assets/team.webp
+- assets/before-after-1.webp
+- assets/before-after-2.webp
 
-# VISUAL STYLE
-- primary_color background (deep green)
-- accent_color for CTAs (neon lime)
-- White cards
-- Rounded corners
-- Soft shadows
-- Mobile first
-- High contrast typography
-
-# REQUIRED PAGE ORDER
-0 Floating call button
-1 Header
-2 Hero
-3 Trust bar
-4 Services
-5 Reviews
-6 Service area + map
-7 FAQ
-8 Quote form
-9 Footer
-
-# IMAGE HANDLING (BATCH SAFE)
-Always:
-
-- Create /assets folder
-- If images missing, assume:
-  assets/hero.webp
-  assets/team.webp
-  assets/before-after-1.webp
-  assets/before-after-2.webp
-
-Always render:
-- Hero image
-- Team section image
-- Before/after section (2 images)
-
-If file missing:
-Render placeholder card:
-"Add hero.webp to /assets"
+# DIRECTORY PAGE (REQUIRED)
+Create /sites/index.html which:
+- lists all generated sites as clickable links
+- shows business_name + industry + location
+- includes a search input (optional tiny JS) to filter list
+- is clean, simple, fast
 
 # README.md MUST INCLUDE
 - How to preview locally (open index.html)
-- Required image filenames
-- How to convert to WebP (Squoosh)
-- Hero width recommendation
-- Cloudflare Pages deploy steps
-- How to duplicate for new client
+- Where to place images (exact filenames)
+- How to convert images to WebP (Squoosh, width 1200 hero)
+- Cloudflare Pages deployment tips
+- How to duplicate for a new demo (copy folder + update brief)
 
-# BATCH GENERATION COMPATIBILITY
-Must work when:
-- JSON auto-generated from CSV
-- services are strings
-- images missing
-- faq missing
-- testimonials missing
-- map missing
-
-Defaults must be generated.
-No failures allowed.
-
-# HARD DO NOT
+# HARD "DO NOT" LIST
 - No popups
 - No chat widgets
-- No external JS
-- No Google Fonts
-- No videos
-- No sliders
+- No video backgrounds
 - No heavy animations
+- No multiple font downloads
+- No external JS libraries
