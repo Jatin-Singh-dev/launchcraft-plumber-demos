@@ -3,59 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated Sites Directory</title>
+    <title>Houston Plumbing Sites Directory</title>
     <style>
-        body { font-family: system-ui; max-width: 800px; margin: 40px auto; padding: 0 20px; background: #f4f4f4; }
-        h1 { text-align: center; color: #333; }
-        input { width: 100%; padding: 15px; font-size: 1.1rem; margin-bottom: 30px; border: 1px solid #ddd; border-radius: 5px; box-sizing:border-box; }
-        .list { display: grid; gap: 15px; }
-        .item { background: #fff; padding: 20px; border-radius: 8px; text-decoration: none; color: #333; display: block; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s; }
-        .item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .item h3 { margin: 0 0 5px; color: #0f3d2e; }
-        .item p { margin: 0; color: #666; font-size: 0.9rem; }
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #f3f4f6; color: #374151; }
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { color: #0b3d2e; font-size: 2.5rem; margin-bottom: 10px; }
+        .badge { display: inline-block; background: #0b3d2e; color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; }
+        input { width: 100%; padding: 18px; font-size: 1.1rem; margin-bottom: 30px; border: 2px solid #e5e7eb; border-radius: 12px; box-sizing:border-box; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); outline: none; transition: border-color 0.2s; }
+        input:focus { border-color: #0b3d2e; }
+        .list { display: grid; gap: 20px; }
+        .item { background: #fff; padding: 25px; border-radius: 12px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s; border: 1px solid transparent; }
+        .item:hover { transform: scale(1.02); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #b7ff3c; }
+        .item-info h3 { margin: 0 0 5px; color: #0b3d2e; font-size: 1.3rem; }
+        .item-info p { margin: 0; color: #6b7280; font-size: 0.95rem; }
+        .item-arrow { font-size: 1.5rem; color: #d1d5db; }
+        .item:hover .item-arrow { color: #0b3d2e; }
     </style>
 </head>
 <body>
-    <h1>Generated Plumbing Sites</h1>
-    <input type="text" id="search" placeholder="Search businesses..." onkeyup="filter()">
+    <header>
+        <div class="badge">BATCH 2: HOUSTON</div>
+        <h1>Plumbing Landing Pages</h1>
+        <p>30 Conversion-Optimized Service Sites</p>
+    </header>
+    <input type="text" id="search" placeholder="Search by business name or location..." onkeyup="filter()">
     <div class="list" id="list">
-        <a href="goodwater-rsv-plumbing/index.html" class="item"><h3>GoodWater RSV Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="rapid-response-plumbing/index.html" class="item"><h3>Rapid Response Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="north-texas-plumbing-co/index.html" class="item"><h3>North Texas Plumbing Co</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="dfw-pro-plumbing/index.html" class="item"><h3>DFW Pro Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="precision-flow-plumbing/index.html" class="item"><h3>Precision Flow Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="elite-drain-plumbing/index.html" class="item"><h3>Elite Drain & Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="truecare-plumbing-texas/index.html" class="item"><h3>TrueCare Plumbing Texas</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="all-star-plumbing-dfw/index.html" class="item"><h3>All Star Plumbing DFW</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="blue-ribbon-plumbing/index.html" class="item"><h3>Blue Ribbon Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="prime-fix-plumbing/index.html" class="item"><h3>Prime Fix Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="rapid-rooter-dfw/index.html" class="item"><h3>Rapid Rooter DFW</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="everflow-plumbing-services/index.html" class="item"><h3>EverFlow Plumbing Services</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="metrocare-plumbing/index.html" class="item"><h3>MetroCare Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="reliable-plumbers-texas/index.html" class="item"><h3>Reliable Plumbers Texas</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="proline-plumbing-dfw/index.html" class="item"><h3>ProLine Plumbing DFW</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="total-flow-plumbing/index.html" class="item"><h3>Total Flow Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="swift-service-plumbing/index.html" class="item"><h3>Swift Service Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="clearwater-plumbing-dfw/index.html" class="item"><h3>ClearWater Plumbing DFW</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="masterfix-plumbing/index.html" class="item"><h3>MasterFix Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="texas-trust-plumbing/index.html" class="item"><h3>Texas Trust Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="fastlane-plumbing/index.html" class="item"><h3>FastLane Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="drainforce-plumbing/index.html" class="item"><h3>DrainForce Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="primecare-plumbing-dfw/index.html" class="item"><h3>PrimeCare Plumbing DFW</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="precision-rooter/index.html" class="item"><h3>Precision Rooter</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="nextgen-plumbing-texas/index.html" class="item"><h3>NextGen Plumbing Texas</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="ironclad-plumbing/index.html" class="item"><h3>Ironclad Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="pureflow-plumbing-dfw/index.html" class="item"><h3>PureFlow Plumbing DFW</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="reliable-rooter-dfw/index.html" class="item"><h3>Reliable Rooter DFW</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="metro-elite-plumbing/index.html" class="item"><h3>Metro Elite Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-<a href="rapidfix-plumbing/index.html" class="item"><h3>RapidFix Plumbing</h3><p>Dallas–Fort Worth, TX</p></a>
-
+        
+            <a href="superior-plumbing-solutions-llc/index.html" class="item">
+                <div class="item-info">
+                    <h3>Superior Plumbing Solutions LLC</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="king-plumbing-inc/index.html" class="item">
+                <div class="item-info">
+                    <h3>King Plumbing Inc</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="sullivan-brothers-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Sullivan Brothers Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="santos-plumbing-business/index.html" class="item">
+                <div class="item-info">
+                    <h3>Santos Plumbing Business</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="kaiser-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Kaiser Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="synergy-plumbing-llc/index.html" class="item">
+                <div class="item-info">
+                    <h3>Synergy Plumbing L.L.C.</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="leak-chasers-plumbing-houston/index.html" class="item">
+                <div class="item-info">
+                    <h3>Leak Chasers Plumbing Houston</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="coastal-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Coastal Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="thomas-sons-plumbing-water-heaters/index.html" class="item">
+                <div class="item-info">
+                    <h3>Thomas & Sons Plumbing & Water Heaters</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="jd-earl-waterworks/index.html" class="item">
+                <div class="item-info">
+                    <h3>JD Earl Waterworks</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="hungen-plumbing-co/index.html" class="item">
+                <div class="item-info">
+                    <h3>Hungen Plumbing Co.</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="mac-mechanical-plumbing-llc/index.html" class="item">
+                <div class="item-info">
+                    <h3>MAC Mechanical Plumbing LLC</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="biotech-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Biotech Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="handyman-services-trejo-repairs-remodeling/index.html" class="item">
+                <div class="item-info">
+                    <h3>Handyman Services Trejo Repairs & Remodeling</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="houston-plumbing-specialist/index.html" class="item">
+                <div class="item-info">
+                    <h3>Houston Plumbing Specialist</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="accurate-plumbing-leak/index.html" class="item">
+                <div class="item-info">
+                    <h3>Accurate Plumbing & Leak</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="keppner-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Keppner Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="pablos-plumbing-remodeling/index.html" class="item">
+                <div class="item-info">
+                    <h3>Pablo’s Plumbing & Remodeling</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="jet-man-services/index.html" class="item">
+                <div class="item-info">
+                    <h3>Jet Man Services</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="hunters-fast-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Hunter's Fast Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="quiet-clean-repairs/index.html" class="item">
+                <div class="item-info">
+                    <h3>Quiet Clean Repairs</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="santiago-plumbing-llc/index.html" class="item">
+                <div class="item-info">
+                    <h3>Santiago Plumbing LLC</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="duron-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Duron Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="arm-plumbing-co/index.html" class="item">
+                <div class="item-info">
+                    <h3>Arm Plumbing Co.</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="kashmere-gardens-plumbing-ac/index.html" class="item">
+                <div class="item-info">
+                    <h3>Kashmere Gardens Plumbing Air Conditioning Repair</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="chesley-plumbing-supply/index.html" class="item">
+                <div class="item-info">
+                    <h3>Chesley Plumbing Supply</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="co-am-plumbing-co/index.html" class="item">
+                <div class="item-info">
+                    <h3>Co-Am Plumbing Co</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="mpi-fixzit-plumbing-sales/index.html" class="item">
+                <div class="item-info">
+                    <h3>MPI Fixzit Plumbing & Sales</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="air-express-construction-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Air Express Construction & Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
+            <a href="giacona-plumbing/index.html" class="item">
+                <div class="item-info">
+                    <h3>Giacona Plumbing</h3>
+                    <p>Houston, TX</p>
+                </div>
+                <div class="item-arrow">→</div>
+            </a>
     </div>
     <script>
         function filter() {
             const q = document.getElementById('search').value.toLowerCase();
             document.querySelectorAll('.item').forEach(el => {
-                el.style.display = el.innerText.toLowerCase().includes(q) ? 'block' : 'none';
+                el.style.display = el.innerText.toLowerCase().includes(q) ? 'flex' : 'none';
             });
         }
     </script>
