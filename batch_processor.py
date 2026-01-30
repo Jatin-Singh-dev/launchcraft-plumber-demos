@@ -11,15 +11,15 @@ SITES_DIR = 'sites'
 SOURCE_ASSETS = 'sites/citywide-plumbing/assets'
 
 # -----------------------------------------------------------------------------
-# 1. HTML TEMPLATE (Strict SKILL.md - Single File)
+# 1. HTML TEMPLATE (Metroflow UI Alignment)
 # -----------------------------------------------------------------------------
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plumbing {location} | Same-Day Service | {business_name}</title>
-    <meta name="description" content="Professional Plumbing in {location}. Same-day service, upfront pricing, and guaranteed workmanship. Call {business_name} at {phone} today!">
+    <title>Plumbing Services in {location} | Same-Day Service | {business_name}</title>
+    <meta name="description" content="Professional Plumbing Services in {location}. Same-day service, upfront pricing, and guaranteed workmanship. Call {business_name} at {phone} today!">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
@@ -68,8 +68,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         .btn {{
             display: inline-flex; justify-content: center; align-items: center;
             padding: 14px 28px; font-weight: 700; border-radius: 8px;
-            text-transform: uppercase; font-size: 0.95rem; border: none; cursor: pointer;
+            text-transform: uppercase; font-size: 0.9rem; border: none; cursor: pointer;
             transition: all 0.2s; min-height: 48px; text-align: center;
+            flex: 1; min-width: 160px;
         }}
         .btn-primary {{ background: var(--accent); color: var(--primary); }}
         .btn-primary:hover {{ background: #a5e636; transform: translateY(-2px); }}
@@ -77,7 +78,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             background: transparent; border: 2px solid var(--accent); color: var(--white); 
         }}
         .btn-outline:hover {{ background: rgba(183, 255, 60, 0.1); transform: translateY(-2px); }}
-        .btn-full {{ width: 100%; }}
+        .btn-full {{ width: 100%; flex: auto; }}
 
         /* Navbar */
         .navbar {{
@@ -89,7 +90,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         .nav-container {{
             height: 100% !important; display: flex; justify-content: space-between; align-items: center;
         }}
-        .brand {{ font-size: 20px; font-weight: 800; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%; }}
+        .brand {{ font-size: 18px; font-weight: 800; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%; }}
         .hamburger {{ 
             font-size: 24px; background: none; border: none; cursor: pointer; color: var(--primary); padding: 5px; 
         }}
@@ -101,38 +102,48 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             box-shadow: var(--shadow);
         }}
         .nav-menu.active {{ display: flex; }}
-        .nav-menu a {{ padding: 15px 20px; border-top: 1px solid var(--border); font-weight: 600; color: var(--primary); }}
-        .menu-cta {{ padding: 15px 20px; }}
+        .nav-menu a {{ padding: 18px 20px; border-top: 1px solid var(--border); font-weight: 600; color: var(--primary); font-size: 1.05rem; }}
+        .menu-call {{ 
+            padding: 18px 20px; border-top: 1px solid var(--border); 
+            display: flex; align-items: center; gap: 12px;
+            color: var(--primary); font-weight: 700; font-size: 1.1rem;
+        }}
+        .menu-call span {{ color: #e11d48; font-size: 1.3rem; }}
 
         /* Hero */
-        .hero {{ background: var(--primary); color: var(--white); padding: 50px 0; overflow: hidden; }}
-        .hero-grid {{ display: grid; gap: 30px; align-items: center; }}
+        .hero {{ background: var(--primary); color: var(--white); padding: 40px 0; overflow: hidden; }}
+        .hero-grid {{ display: flex; flex-direction: column; gap: 30px; }}
+        .hero-text {{ order: 1; }}
+        .hero-img {{ order: 2; }}
+        
         .hero-badge {{ 
-            display: inline-block; background: rgba(183, 255, 60, 0.15); 
-            color: var(--accent); padding: 6px 12px; border-radius: 50px;
-            font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(183, 255, 60, 0.3); margin-bottom: 20px;
+            display: inline-block; background: rgba(183, 255, 60, 0.1); 
+            color: var(--accent); padding: 6px 16px; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 600; border: 1px solid var(--accent); margin-bottom: 25px;
         }}
         .hero h1 {{ font-size: 2.2rem; margin-bottom: 15px; font-weight: 800; line-height: 1.1; color: var(--white); }}
-        .hero-sub {{ font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; max-width: 500px; }}
-        .hero-btns {{ display: flex; flex-direction: column; gap: 15px; }}
+        .hero-sub {{ font-size: 1.05rem; margin-bottom: 30px; opacity: 0.85; }}
+        .hero-btns {{ display: flex; flex-direction: row; flex-wrap: wrap; gap: 12px; }}
 
-        .hero-img img {{ border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }}
+        .hero-img img {{ border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 100%; }}
 
         @media(min-width: 768px) {{
             body {{ padding-top: 64px; }}
             .navbar {{ height: 64px; }}
-            .nav-menu {{ position: static; display: flex; flex-direction: row; width: auto; border: none; box-shadow: none; top: 0; }}
-            .nav-menu a {{ padding: 0 15px; border: none; }}
-            .hamburger, .menu-cta {{ display: none; }}
+            .brand {{ font-size: 22px; }}
+            .nav-menu {{ position: static; display: flex; flex-direction: row; width: auto; border: none; box-shadow: none; top: 0; align-items: center; }}
+            .nav-menu a {{ padding: 0 15px; border: none; font-size: 0.95rem; }}
+            .menu-call {{ border: none; padding: 0 15px; font-size: 1rem; }}
+            .hamburger {{ display: none; }}
             
             .hero {{ padding: 100px 0; }}
-            .hero-grid {{ grid-template-columns: 1.1fr 0.9fr; gap: 60px; }}
+            .hero-grid {{ flex-direction: row; gap: 60px; }}
+            .hero-text {{ flex: 1.1; order: 1; }}
+            .hero-img {{ flex: 0.9; order: 2; }}
             .hero h1 {{ font-size: 3.5rem; }}
-            .hero-btns {{ flex-direction: row; }}
+            .hero-btns {{ flex-wrap: nowrap; }}
+            .btn {{ flex: 0 1 auto; }}
         }}
-
-        /* Sections */
-        .section-title {{ text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 800; color: var(--primary); }}
 
         /* Trust Bar */
         .trust {{ padding: 30px 0; background: var(--white); border-bottom: 1px solid var(--border); }}
@@ -144,6 +155,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
         /* Services */
         .services {{ padding: 80px 0; }}
+        .section-title {{ text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 800; color: var(--primary); }}
         .services-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }}
         .card {{
             background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow);
@@ -177,11 +189,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }}
         .accordion-content {{ padding-bottom: 20px; display: none; color: #555; }}
         .accordion-item.active .accordion-content {{ display: block; }}
-        .icon {{ color: var(--primary); font-weight: 900; }}
 
         /* Form */
         .contact {{ padding: 80px 0; background: var(--primary); color: var(--white); }}
-        .contact .section-title {{ color: var(--white); }}
         .form-box {{ 
             background: var(--white); color: var(--text); padding: 40px; border-radius: 16px; 
             max-width: 600px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
@@ -204,7 +214,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         .footer-grid {{ display: grid; gap: 40px; }}
         .footer-brand {{ color: var(--white); font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; }}
         .footer-col h4 {{ color: var(--white); margin-bottom: 20px; }}
-        .footer-col p {{ margin: 5px 0; }}
         .footer-bottom {{ 
             margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.8rem;
         }}
@@ -221,16 +230,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="nav-container container">
             <a href="#" class="brand">{business_name}</a>
             <button class="hamburger" id="menuBtn">☰</button>
-            <!-- MENU -->
             <div class="nav-menu" id="navMenu">
                 <a href="#services">Services</a>
                 <a href="#reviews">Reviews</a>
-                <a href="#map">Service Area</a>
+                <a href="#map">Service Areas</a>
                 <a href="#faq">FAQ</a>
-                <a href="#quote">Get a Free Quote</a>
-                <div class="menu-cta">
-                    <a href="tel:{phone_clean}" class="btn btn-primary">Call {phone}</a>
-                </div>
+                <a href="#quote">Get Free Quote</a>
+                <a href="tel:{phone_clean}" class="menu-call">
+                    <span>📞</span> Call {phone}
+                </a>
             </div>
         </div>
     </nav>
@@ -239,12 +247,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text">
-                <div class="hero-badge">Licensed & Insured • Same-Day Service</div>
-                <h1>Professional Plumbing<br>in {location}</h1>
-                <p class="hero-sub">Fast response. Upfront pricing. Guaranteed workmanship. Get top-rated local plumbing service today with same-day availability.</p>
+                <div class="hero-badge">Plumbing Services in {location}</div>
+                <h1>Professional Plumbing Services<br>in {location}</h1>
+                <p class="hero-sub">Licensed, insured, and ready to help. Get top-rated local plumbing service today with same-day availability.</p>
                 
                 <div class="hero-btns">
-                    <a href="tel:{phone_clean}" class="btn btn-primary">Call {phone}</a>
+                    <a href="tel:{phone_clean}" class="btn btn-primary">Call Now</a>
                     <a href="#quote" class="btn btn-outline">Get Free Quote</a>
                 </div>
             </div>
@@ -304,7 +312,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="container">
             <h2 class="section-title">What Neighbors Say</h2>
             <div class="rating-line">4.9★ from 50+ Google Reviews</div>
-            
             <div class="review-grid">
                 <div class="review-card">
                     <span class="stars">★★★★★</span>
@@ -344,18 +351,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                     <div class="accordion-title">Are you licensed and insured? <span class="icon">+</span></div>
                     <div class="accordion-content">Absolutely. We are fully licensed and insured for your protection and peace of mind.</div>
                 </div>
-                <div class="accordion-item">
-                    <div class="accordion-title">Do you provide upfront pricing? <span class="icon">+</span></div>
-                    <div class="accordion-content">Yes, we provide clear, upfront pricing before starting any work. No hidden fees.</div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-title">What areas do you serve? <span class="icon">+</span></div>
-                    <div class="accordion-content">We serve {city} and all surrounding Houston communities.</div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-title">How do I get a quote? <span class="icon">+</span></div>
-                    <div class="accordion-content">You can call us directly or use the form below to request a free quote.</div>
-                </div>
             </div>
         </div>
     </section>
@@ -373,22 +368,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                     <div class="form-group">
                         <label>Phone</label>
                         <input type="tel" id="phone" required placeholder="Your Phone Number">
-                    </div>
-                    <div class="form-group">
-                        <label>Service Needed</label>
-                        <select id="service" required>
-                            <option value="">Select a Service</option>
-                            <option value="Drain Cleaning">Drain Cleaning</option>
-                            <option value="Leak Repair">Leak Repair</option>
-                            <option value="Water Heater">Water Heater Service</option>
-                            <option value="Toilet Repair">Toilet Repair</option>
-                            <option value="Sewer Line">Sewer Line</option>
-                            <option value="Emergency">Emergency Plumbing</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Optional Message</label>
-                        <textarea id="message" placeholder="How can we help?"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">Request Quote</button>
                     <div class="success-msg" id="successMsg">Thanks! We’ll call you back within 10 minutes.</div>
@@ -441,20 +420,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             menuBtn.innerText = navMenu.classList.contains('active') ? '✕' : '☰';
         }});
 
-        // Close menu when clicking links
-        document.querySelectorAll('.nav-menu a').forEach(link => {{
-            link.addEventListener('click', () => {{
-                navMenu.classList.remove('active');
-                menuBtn.innerText = '☰';
-            }});
-        }});
-
         // FAQ Accordion
         document.querySelectorAll('.accordion-title').forEach(item => {{
             item.addEventListener('click', () => {{
                 const parent = item.parentElement;
                 parent.classList.toggle('active');
-                item.querySelector('.icon').innerText = parent.classList.contains('active') ? '−' : '+';
             }});
         }});
     </script>
@@ -464,6 +434,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 # -----------------------------------------------------------------------------
 # 2. OTHER TEMPLATES
 # -----------------------------------------------------------------------------
+# (Optional: Update Directory Template to say "Houston - Batch 2" etc.)
 DIRECTORY_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,15 +453,13 @@ DIRECTORY_TEMPLATE = """<!DOCTYPE html>
         .item:hover {{ transform: scale(1.02); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #b7ff3c; }}
         .item-info h3 {{ margin: 0 0 5px; color: #0b3d2e; font-size: 1.3rem; }}
         .item-info p {{ margin: 0; color: #6b7280; font-size: 0.95rem; }}
-        .item-arrow {{ font-size: 1.5rem; color: #d1d5db; }}
-        .item:hover .item-arrow {{ color: #0b3d2e; }}
     </style>
 </head>
 <body>
     <header>
-        <div class="badge">HOUSTON - BATCH 1</div>
+        <div class="badge">HOUSTON - BATCH 2</div>
         <h1>Plumbing Landing Pages</h1>
-        <p>Conversion-Optimized Service Sites</p>
+        <p>Metroflow-Aligned High-Converting Sites</p>
     </header>
     <input type="text" id="search" placeholder="Search by business name or location..." onkeyup="filter()">
     <div class="list" id="list">
@@ -507,35 +476,6 @@ DIRECTORY_TEMPLATE = """<!DOCTYPE html>
 </body>
 </html>"""
 
-README_TEMPLATE = """# {business_name} - Landing Page
-
-## Architecture
-This site follows a **Single-File architecture** as per strict SKILL.md rules:
-- `index.html`: Contains all HTML, inline CSS, and vanilla JS.
-
-## Quick Start
-1.  Open `index.html` in your browser.
-2.  Assets go in the `assets/` folder.
-
-## Required Assets
-- `assets/hero.webp`: Primary hero image (1200px width).
-
-## Deployment
-Upload the entire folder contents to any static host.
-"""
-
-# -----------------------------------------------------------------------------
-# UTILS
-# -----------------------------------------------------------------------------
-def clean_phone(p):
-    return p.replace(' ', '').replace('-', '').replace('(', '').replace(')', '').replace('+', '')
-
-def parse_location(loc):
-    parts = loc.split(',')
-    if len(parts) >= 2:
-        return parts[0].strip(), parts[1].strip()
-    return loc, "TX"
-
 # -----------------------------------------------------------------------------
 # MAIN RUN
 # -----------------------------------------------------------------------------
@@ -545,7 +485,6 @@ def run():
 
     generated_sites = []
 
-    # Read the batch file
     try:
         with open(CSV_PATH, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
@@ -555,26 +494,12 @@ def run():
                 loc = row['location'].strip()
                 phone = row['phone'].strip()
                 
-                # 1. JSON Brief
-                brief = {
-                    "slug": slug,
-                    "business_name": biz_name,
-                    "industry": "Plumbing",
-                    "location": loc,
-                    "primary_goal": "calls",
-                    "phone": phone
-                }
-                
-                with open(os.path.join(BRIEFS_DIR, f"{slug}.json"), 'w', encoding='utf-8') as jf:
-                    json.dump(brief, jf, indent=2)
-                    
-                # 2. Site Directories & Assets
+                # Directories
                 site_path = os.path.join(SITES_DIR, slug)
                 assets_path = os.path.join(site_path, 'assets')
-                
                 if not os.path.exists(assets_path):
                     os.makedirs(assets_path, exist_ok=True)
-                    
+                
                 if os.path.exists(SOURCE_ASSETS):
                     for item in os.listdir(SOURCE_ASSETS):
                         s = os.path.join(SOURCE_ASSETS, item)
@@ -582,10 +507,10 @@ def run():
                         if os.path.isfile(s):
                             shutil.copy2(s, d)
 
-                # 3. Generate Files
-                city, state = parse_location(loc)
-                phone_clean = clean_phone(phone)
-                url_location = loc.replace(' ', '+').replace('–', '-') 
+                # Generate File
+                city, state = loc.split(',')[0].strip(), "TX"
+                phone_clean = phone.replace(' ', '').replace('-', '').replace('(', '').replace(')', '').replace('+', '')
+                url_location = loc.replace(' ', '+') 
                 
                 html_out = HTML_TEMPLATE.format(
                     business_name=biz_name,
@@ -597,36 +522,24 @@ def run():
                     url_location=url_location
                 )
                 
-                # Single-file output
                 with open(os.path.join(site_path, 'index.html'), 'w', encoding='utf-8') as hf:
                     hf.write(html_out)
-
-                with open(os.path.join(site_path, 'README.md'), 'w', encoding='utf-8') as rf:
-                    rf.write(README_TEMPLATE.format(business_name=biz_name, location=loc))
-                    
+                
                 print(f"Generated site: {slug}")
                 generated_sites.append({"name": biz_name, "slug": slug, "loc": loc})
 
-        # 4. Directory Page
+        # Directory Page
         links_html = ""
         for s in generated_sites:
-            links_html += f'''
-            <a href="{s["slug"]}/index.html" class="item">
-                <div class="item-info">
-                    <h3>{s["name"]}</h3>
-                    <p>{s["loc"]}</p>
-                </div>
-                <div class="item-arrow">→</div>
-            </a>'''
+            links_html += f'''<a href="{s["slug"]}/index.html" class="item"><div class="item-info"><h3>{s["name"]}</h3><p>{s["loc"]}</p></div><div class="item-arrow">→</div></a>'''
         
-        directory_html = DIRECTORY_TEMPLATE.format(links=links_html)
         with open(os.path.join(SITES_DIR, 'index.html'), 'w', encoding='utf-8') as df:
-            df.write(directory_html)
+            df.write(DIRECTORY_TEMPLATE.format(links=links_html))
             
         print(f"Generated directory page with {len(generated_sites)} sites.")
 
     except Exception as e:
-        print(f"Error during batch processing: {e}")
+        print(f"Error: {e}")
 
 if __name__ == '__main__':
     run()

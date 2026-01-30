@@ -81,6 +81,7 @@ ALSO create a directory page at:
 - **Mobile Layout**:
   - Left: proper **business_name** (Logo style, bold, 18-20px text).
   - Right: **Hamburger Menu Icon (☰)** (toggles nav links).
+  - **Menu Call (Mobile)**: MUST be a row with a phone icon (`📞 Call {phone}`) at the bottom of the slide-down menu.
   - **NO** top "Call Now" strip. **NO** floating headers.
 - **Desktop Layout**:
   - Logo Left.
@@ -91,12 +92,13 @@ ALSO create a directory page at:
 - **Background**: Deep primary color.
 - **Text Color**: **White** (H1 must be white/light to be visible).
 - **Elements Order**:
-  1.  **Service Badge/Pill**: "Plumbing Services in <Location>" (Capsule style, accent border).
-  2.  **H1**: "Professional <industry> in <location>" (2-3 lines max, big font).
+  1.  **Service Badge/Pill**: MUST be "Plumbing Services in <Location>" (Capsule style, accent border).
+  2.  **H1**: MUST be "Professional <industry> Services in <location>" (Big font, white).
   3.  **Subheadline**: 1-2 lines intro text.
-  4.  **Dual CTAs**:
-      -   **Primary**: "CALL NOW" (Pro color, full width or flex).
+  4.  **Dual CTAs (Mobile Side-by-Side)**:
+      -   **Primary**: "CALL NOW" (Pro color).
       -   **Secondary**: "GET FREE QUOTE" (Outline style).
+      -   **Layout**: MUST be side-by-side (`flex-direction: row`) even on small screens.
 - **Spacing**:
   - Top padding: Compact (40-50px).
   - **NO** massive whitespace gaps.
