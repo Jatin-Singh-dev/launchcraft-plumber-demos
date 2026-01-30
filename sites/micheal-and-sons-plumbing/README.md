@@ -1,24 +1,15 @@
-# Micheal & Sons Plumbing Landing Page
+# Micheal & Sons Plumbing - Landing Page
 
-## Overview
-This is a high-converting, mobile-first landing page generated for **Micheal & Sons Plumbing** in **Dallas–Fort Worth, TX**.
-
-## Features
--   **Modern Mobile UI**: Burger menu, polished hero section, and optimized typography.
--   **Speed**: Pure HTML/CSS, no frameworks, <150KB target.
--   **SEO**: Schema markup, meta tags, and optimized content structure.
+## Architecture
+This site follows a **Single-File architecture** as per strict SKILL.md rules:
+- `index.html`: Contains all HTML, inline CSS, and vanilla JS.
 
 ## Quick Start
-1.  Open `index.html` in your browser to preview.
-2.  Images are loaded from the `assets/` folder.
+1.  Open `index.html` in your browser.
+2.  Assets go in the `assets/` folder.
 
-## Assets
-Ensure the following files exist in `assets/`:
--   `hero.webp` (Max 1200px)
--   `team.webp`
--   `before-after-1.webp`
--   `before-after-2.webp`
+## Required Assets
+- `assets/hero.webp`: Primary hero image (1200px width).
 
 ## Deployment
-This folder is ready to deploy to Netlify, Cloudflare Pages, or Vercel. 
-Just drag and drop the folder!
+Upload the entire folder contents to any static host.

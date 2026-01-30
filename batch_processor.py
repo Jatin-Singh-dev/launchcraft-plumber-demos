@@ -5,16 +5,14 @@ import shutil
 import urllib.parse
 
 # Config
-CSV_PATH = 'briefs/batch/plumbers-batch2.csv'
+CSV_PATH = 'briefs/plumbers-batch.csv'
 BRIEFS_DIR = 'briefs/batch'
 SITES_DIR = 'sites'
 SOURCE_ASSETS = 'sites/citywide-plumbing/assets'
 
 # -----------------------------------------------------------------------------
-# 1. TEMPLATES
+# 1. HTML TEMPLATE (Strict SKILL.md - Single File)
 # -----------------------------------------------------------------------------
-
-# HTML TEMPLATE
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +20,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plumbing {location} | Same-Day Service | {business_name}</title>
     <meta name="description" content="Professional Plumbing in {location}. Same-day service, upfront pricing, and guaranteed workmanship. Call {business_name} at {phone} today!">
-    <link rel="stylesheet" href="styles.css">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
@@ -40,24 +37,200 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       "image": "assets/hero.webp"
     }}
     </script>
+    <style>
+        :root {{
+            --primary: #0b3d2e;
+            --accent: #b7ff3c;
+            --light: #f9fafb;
+            --dark: #111;
+            --text: #333;
+            --white: #fff;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }}
+
+        * {{ box-sizing: border-box; }}
+        html {{ scroll-behavior: smooth; }}
+        body {{ 
+            margin: 0; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            color: var(--text); 
+            line-height: 1.5; 
+            background: var(--light);
+            padding-top: 60px;
+        }}
+
+        a {{ text-decoration: none; color: inherit; }}
+        img {{ max-width: 100%; height: auto; display: block; }}
+        .container {{ max-width: 1200px; margin: 0 auto; padding: 0 20px; }}
+
+        /* Buttons */
+        .btn {{
+            display: inline-flex; justify-content: center; align-items: center;
+            padding: 14px 28px; font-weight: 700; border-radius: 8px;
+            text-transform: uppercase; font-size: 0.95rem; border: none; cursor: pointer;
+            transition: all 0.2s; min-height: 48px; text-align: center;
+        }}
+        .btn-primary {{ background: var(--accent); color: var(--primary); }}
+        .btn-primary:hover {{ background: #a5e636; transform: translateY(-2px); }}
+        .btn-outline {{ 
+            background: transparent; border: 2px solid var(--accent); color: var(--white); 
+        }}
+        .btn-outline:hover {{ background: rgba(183, 255, 60, 0.1); transform: translateY(-2px); }}
+        .btn-full {{ width: 100%; }}
+
+        /* Navbar */
+        .navbar {{
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: var(--white); border-bottom: 1px solid var(--border);
+            z-index: 1000; transition: box-shadow 0.3s;
+        }}
+        .navbar.scrolled {{ box-shadow: var(--shadow); }}
+        .nav-container {{
+            height: 100% !important; display: flex; justify-content: space-between; align-items: center;
+        }}
+        .brand {{ font-size: 20px; font-weight: 800; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%; }}
+        .hamburger {{ 
+            font-size: 24px; background: none; border: none; cursor: pointer; color: var(--primary); padding: 5px; 
+        }}
+
+        /* Slide-down Menu */
+        .nav-menu {{
+            position: absolute; top: 60px; left: 0; width: 100%; background: var(--white);
+            display: none; flex-direction: column; border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }}
+        .nav-menu.active {{ display: flex; }}
+        .nav-menu a {{ padding: 15px 20px; border-top: 1px solid var(--border); font-weight: 600; color: var(--primary); }}
+        .menu-cta {{ padding: 15px 20px; }}
+
+        /* Hero */
+        .hero {{ background: var(--primary); color: var(--white); padding: 50px 0; overflow: hidden; }}
+        .hero-grid {{ display: grid; gap: 30px; align-items: center; }}
+        .hero-badge {{ 
+            display: inline-block; background: rgba(183, 255, 60, 0.15); 
+            color: var(--accent); padding: 6px 12px; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(183, 255, 60, 0.3); margin-bottom: 20px;
+        }}
+        .hero h1 {{ font-size: 2.2rem; margin-bottom: 15px; font-weight: 800; line-height: 1.1; color: var(--white); }}
+        .hero-sub {{ font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; max-width: 500px; }}
+        .hero-btns {{ display: flex; flex-direction: column; gap: 15px; }}
+
+        .hero-img img {{ border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }}
+
+        @media(min-width: 768px) {{
+            body {{ padding-top: 64px; }}
+            .navbar {{ height: 64px; }}
+            .nav-menu {{ position: static; display: flex; flex-direction: row; width: auto; border: none; box-shadow: none; top: 0; }}
+            .nav-menu a {{ padding: 0 15px; border: none; }}
+            .hamburger, .menu-cta {{ display: none; }}
+            
+            .hero {{ padding: 100px 0; }}
+            .hero-grid {{ grid-template-columns: 1.1fr 0.9fr; gap: 60px; }}
+            .hero h1 {{ font-size: 3.5rem; }}
+            .hero-btns {{ flex-direction: row; }}
+        }}
+
+        /* Sections */
+        .section-title {{ text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 800; color: var(--primary); }}
+
+        /* Trust Bar */
+        .trust {{ padding: 30px 0; background: var(--white); border-bottom: 1px solid var(--border); }}
+        .trust-grid {{ display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }}
+        .chip {{ 
+            background: var(--light); padding: 10px 18px; border-radius: 50px; font-weight: 600; font-size: 0.85rem;
+            border: 1px solid var(--border); display: flex; align-items: center; gap: 8px;
+        }}
+
+        /* Services */
+        .services {{ padding: 80px 0; }}
+        .services-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }}
+        .card {{
+            background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow);
+            border: 1px solid var(--border); transition: transform 0.2s;
+        }}
+        .card:hover {{ transform: translateY(-5px); border-color: var(--accent); }}
+        .card h3 {{ color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }}
+        .card-icon {{ font-size: 1.4rem; }}
+
+        /* Reviews */
+        .reviews {{ padding: 80px 0; background: #f3f4f6; text-align: center; }}
+        .rating-line {{ font-weight: 700; font-size: 1.2rem; margin-bottom: 40px; color: var(--primary); }}
+        .review-grid {{ display: grid; gap: 24px; max-width: 900px; margin: 0 auto; }}
+        .review-card {{ background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow); text-align: left; }}
+        .stars {{ color: #fbbf24; font-size: 1.2rem; margin-bottom: 10px; display: block; }}
+        .review-author {{ font-weight: 700; margin-top: 20px; color: var(--primary); font-size: 0.9rem; }}
+
+        /* Map */
+        .map-section {{ padding: 80px 0; background: var(--white); }}
+        .map-text {{ text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 30px; }}
+        .map-container {{ border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); height: 400px; }}
+        iframe {{ width: 100%; height: 100%; border: none; }}
+
+        /* FAQ */
+        .faq {{ padding: 80px 0; }}
+        .accordion {{ max-width: 800px; margin: 0 auto; }}
+        .accordion-item {{ border-bottom: 1px solid var(--border); }}
+        .accordion-title {{ 
+            padding: 20px 0; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; 
+            color: var(--primary); font-size: 1.1rem;
+        }}
+        .accordion-content {{ padding-bottom: 20px; display: none; color: #555; }}
+        .accordion-item.active .accordion-content {{ display: block; }}
+        .icon {{ color: var(--primary); font-weight: 900; }}
+
+        /* Form */
+        .contact {{ padding: 80px 0; background: var(--primary); color: var(--white); }}
+        .contact .section-title {{ color: var(--white); }}
+        .form-box {{ 
+            background: var(--white); color: var(--text); padding: 40px; border-radius: 16px; 
+            max-width: 600px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }}
+        .form-group {{ margin-bottom: 20px; }}
+        .form-group label {{ display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; }}
+        .form-group input, .form-group select, .form-group textarea {{ 
+            width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;
+        }}
+        .form-group textarea {{ height: 100px; resize: none; }}
+        .success-msg {{ 
+            display: none; background: #ecfdf5; color: #065f46; padding: 15px; border-radius: 8px; 
+            text-align: center; margin-top: 20px; font-weight: 700; border: 1px solid #a7f3d0;
+        }}
+        .form-footer {{ margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid var(--border); }}
+        .highlight {{ color: var(--primary); font-weight: 800; text-decoration: underline; }}
+
+        /* Footer */
+        footer {{ background: #07261d; color: #9ca3af; padding: 60px 0 20px; }}
+        .footer-grid {{ display: grid; gap: 40px; }}
+        .footer-brand {{ color: var(--white); font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; }}
+        .footer-col h4 {{ color: var(--white); margin-bottom: 20px; }}
+        .footer-col p {{ margin: 5px 0; }}
+        .footer-bottom {{ 
+            margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.8rem;
+        }}
+
+        @media(min-width: 768px) {{
+            .footer-grid {{ grid-template-columns: 1fr 1fr; }}
+        }}
+    </style>
 </head>
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="nav-container container">
             <a href="#" class="brand">{business_name}</a>
             <button class="hamburger" id="menuBtn">☰</button>
-        </div>
-        <!-- SLIDE-DOWN MENU -->
-        <div class="nav-menu" id="navMenu">
-            <a href="#services">Services</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#map">Service Area</a>
-            <a href="#faq">FAQ</a>
-            <a href="#quote">Get a Free Quote</a>
-            <div class="menu-cta">
-                <a href="tel:{phone_clean}" class="btn btn-primary">Call {phone}</a>
+            <!-- MENU -->
+            <div class="nav-menu" id="navMenu">
+                <a href="#services">Services</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#map">Service Area</a>
+                <a href="#faq">FAQ</a>
+                <a href="#quote">Get a Free Quote</a>
+                <div class="menu-cta">
+                    <a href="tel:{phone_clean}" class="btn btn-primary">Call {phone}</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -192,7 +365,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="container">
             <h2 class="section-title">Get a Free Quote</h2>
             <div class="form-box">
-                <form id="quoteForm">
+                <form id="quoteForm" onsubmit="event.preventDefault(); document.getElementById('successMsg').style.display='block'; this.style.opacity='0.5';">
                     <div class="form-group">
                         <label>Name</label>
                         <input type="text" id="name" required placeholder="Your Name">
@@ -248,249 +421,48 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {{
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {{
+                navbar.classList.add('scrolled');
+            }} else {{
+                navbar.classList.remove('scrolled');
+            }}
+        }});
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        menuBtn.addEventListener('click', () => {{
+            navMenu.classList.toggle('active');
+            menuBtn.innerText = navMenu.classList.contains('active') ? '✕' : '☰';
+        }});
+
+        // Close menu when clicking links
+        document.querySelectorAll('.nav-menu a').forEach(link => {{
+            link.addEventListener('click', () => {{
+                navMenu.classList.remove('active');
+                menuBtn.innerText = '☰';
+            }});
+        }});
+
+        // FAQ Accordion
+        document.querySelectorAll('.accordion-title').forEach(item => {{
+            item.addEventListener('click', () => {{
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+                item.querySelector('.icon').innerText = parent.classList.contains('active') ? '−' : '+';
+            }});
+        }});
+    </script>
 </body>
 </html>"""
 
-# CSS TEMPLATE
-CSS_TEMPLATE = """:root {
-    --primary: #0b3d2e;
-    --accent: #b7ff3c;
-    --light: #f9fafb;
-    --dark: #111;
-    --text: #333;
-    --white: #fff;
-    --border: #e5e7eb;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { 
-    margin: 0; 
-    font-family: system-ui, -apple-system, sans-serif; 
-    color: var(--text); 
-    line-height: 1.5; 
-    background: var(--light);
-}
-
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; height: auto; display: block; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-/* Buttons */
-.btn {
-    display: inline-flex; justify-content: center; align-items: center;
-    padding: 14px 28px; font-weight: 700; border-radius: 8px;
-    text-transform: uppercase; font-size: 0.95rem; border: none; cursor: pointer;
-    transition: all 0.2s; min-height: 48px;
-}
-.btn-primary { background: var(--accent); color: var(--primary); }
-.btn-primary:hover { background: #a5e636; transform: translateY(-2px); }
-.btn-outline { 
-    background: transparent; border: 2px solid var(--accent); color: var(--white); 
-}
-.btn-outline:hover { background: rgba(183, 255, 60, 0.1); transform: translateY(-2px); }
-.btn-full { width: 100%; }
-
-/* Navbar */
-.navbar {
-    position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-    background: var(--white); border-bottom: 1px solid var(--border);
-    z-index: 1000; transition: box-shadow 0.3s;
-}
-.navbar.scrolled { box-shadow: var(--shadow); }
-.nav-container {
-    height: 100%; display: flex; justify-content: space-between; align-items: center;
-}
-.brand { font-size: 20px; font-weight: 800; color: var(--primary); }
-.hamburger { 
-    font-size: 24px; background: none; border: none; cursor: pointer; color: var(--primary); padding: 5px; 
-}
-
-/* Slide-down Menu */
-.nav-menu {
-    position: absolute; top: 60px; left: 0; width: 100%; background: var(--white);
-    display: none; flex-direction: column; border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-}
-.nav-menu.active { display: flex; }
-.nav-menu a { padding: 15px 20px; border-top: 1px solid var(--border); font-weight: 600; color: var(--primary); }
-.menu-cta { padding: 15px 20px; }
-
-/* Hero */
-.hero { background: var(--primary); color: var(--white); padding: 60px 0 40px; margin-top: 60px; overflow: hidden; }
-.hero-grid { display: grid; gap: 30px; align-items: center; }
-.hero-badge { 
-    display: inline-block; background: rgba(183, 255, 60, 0.15); 
-    color: var(--accent); padding: 6px 12px; border-radius: 50px;
-    font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(183, 255, 60, 0.3); margin-bottom: 20px;
-}
-.hero h1 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 800; line-height: 1.1; color: var(--white); }
-.hero-sub { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; max-width: 500px; }
-.hero-btns { display: flex; flex-direction: column; gap: 15px; }
-
-.hero-img img { border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-
-@media(min-width: 768px) {
-    .navbar { height: 64px; }
-    .nav-menu { position: static; display: flex; flex-direction: row; width: auto; border: none; box-shadow: none; }
-    .nav-menu a { padding: 0 15px; border: none; }
-    .hamburger, .menu-cta { display: none; }
-    
-    .hero { padding: 100px 0; }
-    .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 60px; }
-    .hero h1 { font-size: 3.5rem; }
-    .hero-btns { flex-direction: row; }
-}
-
-/* Sections */
-.section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 800; color: var(--primary); }
-
-/* Trust Bar */
-.trust { padding: 30px 0; background: var(--white); border-bottom: 1px solid var(--border); }
-.trust-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-.chip { 
-    background: var(--light); padding: 10px 18px; border-radius: 50px; font-weight: 600; font-size: 0.85rem;
-    border: 1px solid var(--border); display: flex; align-items: center; gap: 8px;
-}
-
-/* Services */
-.services { padding: 80px 0; }
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-.card {
-    background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow);
-    border: 1px solid var(--border); transition: transform 0.2s;
-}
-.card:hover { transform: translateY(-5px); border-color: var(--accent); }
-.card h3 { color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-.card-icon { font-size: 1.4rem; }
-
-/* Reviews */
-.reviews { padding: 80px 0; background: #f3f4f6; text-align: center; }
-.rating-line { font-weight: 700; font-size: 1.2rem; margin-bottom: 40px; color: var(--primary); }
-.review-grid { display: grid; gap: 24px; max-width: 900px; margin: 0 auto; }
-.review-card { background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow); text-align: left; }
-.stars { color: #fbbf24; font-size: 1.2rem; margin-bottom: 10px; display: block; }
-.review-author { font-weight: 700; margin-top: 20px; color: var(--primary); font-size: 0.9rem; }
-
-/* Map */
-.map-section { padding: 80px 0; background: var(--white); }
-.map-text { text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 30px; }
-.map-container { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); height: 400px; }
-iframe { width: 100%; height: 100%; border: none; }
-
-/* FAQ */
-.faq { padding: 80px 0; }
-.accordion { max-width: 800px; margin: 0 auto; }
-.accordion-item { border-bottom: 1px solid var(--border); }
-.accordion-title { 
-    padding: 20px 0; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; 
-    color: var(--primary); font-size: 1.1rem;
-}
-.accordion-content { padding-bottom: 20px; display: none; color: #555; }
-.accordion-item.active .accordion-content { display: block; }
-.icon { color: var(--primary); font-weight: 900; }
-
-/* Form */
-.contact { padding: 80px 0; background: var(--primary); color: var(--white); }
-.contact .section-title { color: var(--white); }
-.form-box { 
-    background: var(--white); color: var(--text); padding: 40px; border-radius: 16px; 
-    max-width: 600px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-}
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; }
-.form-group input, .form-group select, .form-group textarea { 
-    width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;
-}
-.form-group textarea { height: 100px; resize: none; }
-.success-msg { 
-    display: none; background: #ecfdf5; color: #065f46; padding: 15px; border-radius: 8px; 
-    text-align: center; margin-top: 20px; font-weight: 700; border: 1px solid #a7f3d0;
-}
-.form-footer { margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid var(--border); }
-.highlight { color: var(--primary); font-weight: 800; text-decoration: underline; }
-
-/* Footer */
-footer { background: #07261d; color: #9ca3af; padding: 60px 0 20px; }
-.footer-grid { display: grid; gap: 40px; }
-.footer-brand { color: var(--white); font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; }
-.footer-col h4 { color: var(--white); margin-bottom: 20px; }
-.footer-col p { margin: 5px 0; }
-.footer-bottom { 
-    margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.8rem;
-}
-
-@media(min-width: 768px) {
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-}
-"""
-
-# JS TEMPLATE
-JS_TEMPLATE = """// Navbar Scroll Effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// Mobile Menu Toggle
-const menuBtn = document.getElementById('menuBtn');
-const navMenu = document.getElementById('navMenu');
-
-menuBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    menuBtn.innerText = navMenu.classList.contains('active') ? '✕' : '☰';
-});
-
-// Close menu when clicking links
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        menuBtn.innerText = '☰';
-    });
-});
-
-// FAQ Accordion
-document.querySelectorAll('.accordion-title').forEach(item => {
-    item.addEventListener('click', () => {
-        const parent = item.parentElement;
-        parent.classList.toggle('active');
-        item.querySelector('.icon').innerText = parent.classList.contains('active') ? '−' : '+';
-    });
-});
-
-// Form Submission
-const quoteForm = document.getElementById('quoteForm');
-const successMsg = document.getElementById('successMsg');
-
-if (quoteForm) {
-    quoteForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // In a real app, you would send data to a backend here
-        
-        quoteForm.style.opacity = '0.5';
-        quoteForm.style.pointerEvents = 'none';
-        successMsg.style.display = 'block';
-        
-        // Optional: Reset form after delay
-        setTimeout(() => {
-            quoteForm.reset();
-            quoteForm.style.opacity = '1';
-            quoteForm.style.pointerEvents = 'auto';
-            // successMsg.style.display = 'none';
-        }, 3000);
-    });
-}
-"""
-
 # -----------------------------------------------------------------------------
-# 2. DIRECTORY TEMPLATE
+# 2. OTHER TEMPLATES
 # -----------------------------------------------------------------------------
 DIRECTORY_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
@@ -516,9 +488,9 @@ DIRECTORY_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
     <header>
-        <div class="badge">BATCH 2: HOUSTON</div>
+        <div class="badge">HOUSTON - BATCH 1</div>
         <h1>Plumbing Landing Pages</h1>
-        <p>30 Conversion-Optimized Service Sites</p>
+        <p>Conversion-Optimized Service Sites</p>
     </header>
     <input type="text" id="search" placeholder="Search by business name or location..." onkeyup="filter()">
     <div class="list" id="list">
@@ -535,16 +507,11 @@ DIRECTORY_TEMPLATE = """<!DOCTYPE html>
 </body>
 </html>"""
 
-# -----------------------------------------------------------------------------
-# 3. README TEMPLATE
-# -----------------------------------------------------------------------------
-README_TEMPLATE = """# {business_name} - Houston Landing Page
+README_TEMPLATE = """# {business_name} - Landing Page
 
 ## Architecture
-This site follows a **3-file structure** for better maintainability and modularity:
-- `index.html`: Optimized HTML5 structure with JSON-LD schema.
-- `styles.css`: Modern, responsive CSS using CSS Variables.
-- `script.js`: Vanilla JS for interactions (Burger menu, FAQ, Form).
+This site follows a **Single-File architecture** as per strict SKILL.md rules:
+- `index.html`: Contains all HTML, inline CSS, and vanilla JS.
 
 ## Quick Start
 1.  Open `index.html` in your browser.
@@ -554,7 +521,7 @@ This site follows a **3-file structure** for better maintainability and modulari
 - `assets/hero.webp`: Primary hero image (1200px width).
 
 ## Deployment
-Upload the entire folder contents to any static host (Netlify, Vercel, S3).
+Upload the entire folder contents to any static host.
 """
 
 # -----------------------------------------------------------------------------
@@ -582,10 +549,6 @@ def run():
     try:
         with open(CSV_PATH, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
-            # Check headers
-            headers = reader.fieldnames
-            print(f"Reading CSV: {CSV_PATH} | Headers: {headers}")
-
             for row in reader:
                 slug = row['slug'].strip()
                 biz_name = row['business_name'].strip()
@@ -612,7 +575,6 @@ def run():
                 if not os.path.exists(assets_path):
                     os.makedirs(assets_path, exist_ok=True)
                     
-                # Copy assets if source exists (optional fallback)
                 if os.path.exists(SOURCE_ASSETS):
                     for item in os.listdir(SOURCE_ASSETS):
                         s = os.path.join(SOURCE_ASSETS, item)
@@ -625,7 +587,6 @@ def run():
                 phone_clean = clean_phone(phone)
                 url_location = loc.replace(' ', '+').replace('–', '-') 
                 
-                # Populate HTML
                 html_out = HTML_TEMPLATE.format(
                     business_name=biz_name,
                     location=loc,
@@ -636,15 +597,9 @@ def run():
                     url_location=url_location
                 )
                 
-                # Write Files
+                # Single-file output
                 with open(os.path.join(site_path, 'index.html'), 'w', encoding='utf-8') as hf:
                     hf.write(html_out)
-                
-                with open(os.path.join(site_path, 'styles.css'), 'w', encoding='utf-8') as cf:
-                    cf.write(CSS_TEMPLATE)
-                    
-                with open(os.path.join(site_path, 'script.js'), 'w', encoding='utf-8') as jsf:
-                    jsf.write(JS_TEMPLATE)
 
                 with open(os.path.join(site_path, 'README.md'), 'w', encoding='utf-8') as rf:
                     rf.write(README_TEMPLATE.format(business_name=biz_name, location=loc))
@@ -652,7 +607,7 @@ def run():
                 print(f"Generated site: {slug}")
                 generated_sites.append({"name": biz_name, "slug": slug, "loc": loc})
 
-        # 4. Generate Directory Page
+        # 4. Directory Page
         links_html = ""
         for s in generated_sites:
             links_html += f'''
