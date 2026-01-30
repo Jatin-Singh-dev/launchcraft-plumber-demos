@@ -5,7 +5,7 @@ import shutil
 import urllib.parse
 
 # Config
-CSV_PATH = 'briefs/plumbers-batch.csv'
+CSV_PATH = 'briefs/batch/plumbers-batch2.csv'
 BRIEFS_DIR = 'briefs/batch'
 SITES_DIR = 'sites'
 SOURCE_ASSETS = 'sites/citywide-plumbing/assets'

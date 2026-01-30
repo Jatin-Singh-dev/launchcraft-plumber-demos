@@ -76,38 +76,33 @@ ALSO create a directory page at:
 
 # CONVERSION BLUEPRINT (MUST IMPLEMENT)
 
-## 1) MOBILE STICKY CALL BAR (FIXED, NOT UGLY TEXT)
-Must exist ALWAYS and must look like a real product header.
+## 1) NAVBAR (MOBILE + DESKTOP)
+- **Universal Fixed Navbar** (White background, shadow).
+- **Mobile Layout**:
+  - Left: proper **business_name** (Logo style, bold, 18-20px text).
+  - Right: **Hamburger Menu Icon (☰)** (toggles nav links).
+  - **NO** top "Call Now" strip. **NO** floating headers.
+- **Desktop Layout**:
+  - Logo Left.
+  - Links Center (Services, Reviews, Areas, FAQ, Quote).
+  - Phone Number Right (Text + Icon).
 
-- Fixed at top on mobile with:
-  - Left: business_name (brand text)
-  - Right: high-contrast call button "Call" + phone icon
-- Height >= 52px, tap targets >= 48px
-- Uses brand.accent_color for the button
-- Adds padding to body so content isn’t hidden behind it
+## 2) HERO ABOVE THE FOLD (MOBILE OPTIMISED)
+- **Background**: Deep primary color.
+- **Text Color**: **White** (H1 must be white/light to be visible).
+- **Elements Order**:
+  1.  **Service Badge/Pill**: "Plumbing Services in <Location>" (Capsule style, accent border).
+  2.  **H1**: "Professional <industry> in <location>" (2-3 lines max, big font).
+  3.  **Subheadline**: 1-2 lines intro text.
+  4.  **Dual CTAs**:
+      -   **Primary**: "CALL NOW" (Pro color, full width or flex).
+      -   **Secondary**: "GET FREE QUOTE" (Outline style).
+- **Spacing**:
+  - Top padding: Compact (40-50px).
+  - **NO** massive whitespace gaps.
+  - Tighter margins between H1 and buttons.
 
-Implementation requirement:
-- Use CSS media query so it shows on mobile and optionally becomes a FAB on desktop
-- Must include tel: link
-- Must NOT be plain "Call Now" text floating in the page
-
-## 2) HEADER (DESKTOP / NORMAL)
-- Simple header with:
-  - business_name (logo text)
-  - nav anchors (Services, Reviews, Areas, FAQ, Quote)
-  - phone in header as tel link
-
-## 3) HERO ABOVE THE FOLD
-- H1: "Professional <industry> in <location>"
-- Subheadline includes: "Licensed & Insured" + years if provided + "Same-Day Service"
-- 3 short benefit bullets (fast response, upfront pricing, guarantee)
-- CTAs:
-  - Primary: CALL NOW (tel link)
-  - Secondary: GET FREE QUOTE (scroll to form section)
-- Hero image right (desktop) below text (mobile)
-- IMPORTANT: mobile hero top padding must be compact and not create a big empty block.
-
-## 4) TRUST BAR
+## 3) TRUST BAR
 Show 4 trust chips/cards:
 - Licensed & Insured
 - Same-Day / Emergency (if emergency=true)
@@ -186,16 +181,15 @@ Add LocalBusiness schema:
 - Clean spacing, scannable mobile layout
 
 # REQUIRED PAGE ORDER (STRICT)
-0) Mobile sticky call bar (fixed)
-1) Header
-2) Hero
-3) Trust bar
-4) Services grid
-5) Reviews/testimonials
-6) Service areas + map
-7) FAQ
-8) Quote form
-9) Footer
+0) Navbar (Mobile + Desktop)
+1) Hero
+2) Trust bar
+3) Services grid
+4) Reviews/testimonials
+5) Service areas + map
+6) FAQ
+7) Quote form
+8) Footer
 
 # IMAGE HANDLING (REQUIRED)
 - ALWAYS create /sites/<slug>/assets/
