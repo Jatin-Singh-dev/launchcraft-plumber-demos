@@ -13,7 +13,7 @@ async function main() {
     // 1. Read Template
     const templatePath = path.join(TEMPLATE_DIR, 'index.html');
     let templateHtml = fs.readFileSync(templatePath, 'utf8');
-    
+
     // Normalize template placeholders for easier replacement if needed, 
     // but we will simple replace specific string constants from the known template.
     // Template known values:
@@ -23,7 +23,7 @@ async function main() {
     const TPL_PHONE = "817-555-0142"; // Check format in HTML
     const TPL_PHONE_DISPLAY = "(817) 555-0142";
     const TPL_PHONE_LINK = "+18175550142";
-    
+
     // 2. Read CSV
     const fileStream = fs.createReadStream(CSV_PATH);
     const rl = readline.createInterface({
@@ -59,7 +59,7 @@ async function main() {
         // Clean phone for tel: link
         const phoneLink = data.phone.replace(/[^0-9+]/g, '');
         // Format phone for display if needed, or just use as is from CSV
-        const phoneDisplay = data.phone.replace('+1 ', ''); 
+        const phoneDisplay = data.phone.replace('+1 ', '');
 
         console.log(`Generating: ${data.slug}`);
 
@@ -80,35 +80,37 @@ async function main() {
         // 5. Customize HTML
         let html = templateHtml;
 
-        // Replace Business Name
+        // Replace Business Name Global
         html = html.replaceAll(TPL_NAME, data.business_name);
-        // Replace "Arlington PROS" logo text if separate (Template uses "Arlington <span>PROS</span>")
-        // We will replace "Arlington <span>PROS</span>" with proper business name logic if possible,
-        // or just replace the string "Arlington" with city and keep PROS? 
-        // The template has: <a href="#" class="logo">Arlington <span>PROS</span></a>
-        // Let's replace the whole inner HTML of the logo to be safe:
-        // Or better, just string replacement.
-        // "Arlington <span>PROS</span>" -> data.business_name (simple text)
-        // or attempt to keep formatting: `${data.city} <span>PROS</span>` ??
-        // The user request says "Business Name -> {{BUSINESS_NAME}}". Let's stick to full business name.
-        html = html.replace(/Arlington <span>PROS<\/span>/g, `${data.city} <span>Handyman</span>`); 
+
+        // Replace Business Name in Logo
+        // Template has: <a href="#" class="logo">Arlington <span>PROS</span></a>
+        // We want to replace this with the actual business name.
+        // We will preserve the two-tone style by keeping the last word in the span if it has multiple words.
+        const nameParts = data.business_name.split(' ');
+        let logoHtml = data.business_name;
+        if (nameParts.length > 1) {
+            const lastWord = nameParts.pop();
+            logoHtml = `${nameParts.join(' ')} <span>${lastWord}</span>`;
+        }
+        html = html.replace(/Arlington <span>PROS<\/span>/g, logoHtml);
 
         // Replace Phone
         // Link: tel:+18175550142
         html = html.replaceAll(TPL_PHONE_LINK, phoneLink);
         // Display: (817) 555-0142
-        html = html.replaceAll(TPL_PHONE_DISPLAY, phoneDisplay); 
+        html = html.replaceAll(TPL_PHONE_DISPLAY, phoneDisplay);
         // Also check if any loose numbers exist
         // The template uses "+1 (817) 555-0142" in footer
-        
+
         // Replace City/State locations
         // "Handyman in Arlington, TX"
         html = html.replaceAll(`Handyman in ${TPL_CITY}, ${TPL_STATE}`, `Handyman in ${data.city}, ${data.state}`);
         html = html.replaceAll(`${TPL_CITY}, ${TPL_STATE}`, `${data.city}, ${data.state}`);
-        
+
         // "Arlington-Based"
         html = html.replaceAll(`${TPL_CITY}-Based`, `${data.city}-Based`);
-        
+
         // General City replacements (Service areas, intro text)
         // Be careful not to break "Arlington Handyman Pros" which was already replaced?
         // Actually simplest is global replace of "Arlington" with new City, EXCEPT where we specifically handled Business Name.

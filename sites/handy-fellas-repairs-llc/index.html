@@ -177,9 +177,33 @@
             font-size: 1.5rem;
             color: var(--primary-dark);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            /* display: flex; REMOVED to allow natural text wrapping */
+            /* align-items: center; */
+            /* gap: 8px; */
+            line-height: 1.2;
+            display: inline-block;
+            /* Behave like text block */
+        }
+
+        .logo span {
+            color: var(--primary);
+            /* margin-left: 6px; Optional spacing if needed, but space in HTML usually handles it */
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.1rem;
+                /* gap: 4px; */
+                max-width: 80%;
+                /* Ensure space for menu button */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.1rem;
+                gap: 4px;
+            }
         }
 
         .logo span {
@@ -827,7 +851,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container nav-content">
-            <a href="#" class="logo">Hurst <span>Handyman</span></a>
+            <a href="#" class="logo">Handy fellas repairs <span>LLC</span></a>
 
             <div class="desktop-nav">
                 <a href="#services">Services</a>
