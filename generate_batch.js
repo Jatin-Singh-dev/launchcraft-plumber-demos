@@ -42,8 +42,21 @@ async function main() {
             continue;
         }
 
-        // Simple CSV parsing (assuming no commas in values based on user input sample)
-        const cols = line.split(',');
+        // Regex to handle CSV with quoted fields
+        const regex = /(?:^|,)(?:"([^"]*)"|([^",]*))/g;
+        let cols = [];
+        let match;
+        while ((match = regex.exec(line)) !== null) {
+            // match[1] is quoted value, match[2] is unquoted value
+            let val = match[1] !== undefined ? match[1] : match[2];
+            cols.push(val.trim());
+        }
+
+        // Remove the empty match that regex might produce at the end if not careful, 
+        // but typically this regex works for standard CSV. 
+        // A safer standard parser approach:
+        // const cols = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g).map(v => v.replace(/^"|"$/g, '')); 
+        // But let's stick to the while loop which is fairly robust for this simple case.
         if (cols.length < 5) continue;
 
         const data = {
