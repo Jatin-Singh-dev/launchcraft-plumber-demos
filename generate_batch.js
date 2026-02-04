@@ -4,7 +4,7 @@ const readline = require('readline');
 
 // Configuration
 const CSV_PATH = path.join(__dirname, 'briefs', 'handyman-batch.csv');
-const TEMPLATE_DIR = path.join(__dirname, 'sites', 'arlington-handyman-demo');
+const TEMPLATE_DIR = path.join(__dirname, 'sites', 'handyman-demo-template');
 const SITES_ROOT = path.join(__dirname, 'sites');
 
 async function main() {
@@ -52,8 +52,9 @@ async function main() {
             city: cols[2],
             state: cols[3],
             phone: cols[4], // e.g. +1 817-210-2874
-            rating: cols[5] || '4.8',
-            reviews: cols[6] || '20'
+            // CSV v2 has no rating/reviews, defaulting for demo purposes
+            rating: cols[5] || '4.9',
+            reviews: cols[6] || '42'
         };
 
         // Clean phone for tel: link
@@ -100,8 +101,11 @@ async function main() {
         html = html.replaceAll(TPL_PHONE_LINK, phoneLink);
         // Display: (817) 555-0142
         html = html.replaceAll(TPL_PHONE_DISPLAY, phoneDisplay);
-        // Also check if any loose numbers exist
-        // The template uses "+1 (817) 555-0142" in footer
+
+        // Handle multiline phone in footer
+        // (817)
+        // 555-0142
+        html = html.replace(/\(817\)\s+555-0142/g, phoneDisplay);
 
         // Replace City/State locations
         // "Handyman in Arlington, TX"

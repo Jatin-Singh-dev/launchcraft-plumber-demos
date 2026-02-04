@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handyman in Glendale, AZ | Moody-Do's Handyman LLC</title>
+    <meta name="description"
+        content="Professional handyman services in Glendale, AZ. Licensed, insured, and reliable. Call for drywall, painting, fence repair, and more. Get a free estimate today.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Brand Colors: Deep Teal & Lime */
+            --primary: #0f766e;
+            /* Deep Teal */
+            --primary-dark: #134e4a;
+            /* Darker Teal */
+            --primary-light: #115e59;
+            /* Slightly lighter teal */
+            --accent: #bef264;
+            /* Lime Green */
+            --accent-hover: #a3e635;
+            /* Darker Lime */
+
+            /* Neutrals */
+            --dark: #042f2e;
+            /* Very dark teal/black */
+            --text: #334155;
+            /* Slate 700 */
+            --text-light: #94a3b8;
+            /* Slate 400 */
+            --light: #f0fdf4;
+            /* Very light mint/white */
+            --white: #ffffff;
+
+            /* UI Elements */
+            --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --radius: 16px;
+            --container: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+            padding-bottom: 80px;
+            /* Space for sticky bar on mobile */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .btn,
+        .logo {
+            font-family: 'Outfit', system-ui, sans-serif;
+        }
+
+        /* Utilities */
+        .container {
+            width: 100%;
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            /* Pill shape */
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(190, 242, 100, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(190, 242, 100, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-dark);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-white {
+            background: var(--white);
+        }
+
+        .bg-dark {
+            background: var(--primary-dark);
+            color: var(--white);
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            text-decoration: none;
+            /* display: flex; REMOVED to allow natural text wrapping */
+            /* align-items: center; */
+            /* gap: 8px; */
+            line-height: 1.2;
+            display: inline-block;
+            /* Behave like text block */
+        }
+
+        .logo span {
+            color: var(--primary);
+            /* margin-left: 6px; Optional spacing if needed, but space in HTML usually handles it */
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.1rem;
+                /* gap: 4px; */
+                max-width: 80%;
+                /* Ensure space for menu button */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.1rem;
+                gap: 4px;
+            }
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .desktop-nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.75rem;
+            cursor: pointer;
+            color: var(--primary-dark);
+            display: block;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 75px;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-150%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 999;
+            flex-direction: column;
+            gap: 15px;
+            display: flex;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .mobile-menu a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 0 100px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--white);
+            border-radius: 0 0 50px 50px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.75rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hero-img-container {
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: rotate(-2deg);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: 20px;
+            left: -10px;
+            background: var(--white);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            max-width: 200px;
+        }
+
+        .floating-card .icon-box {
+            background: var(--accent);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Services */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: default;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            background: var(--light);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        /* How It Works */
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--radius);
+        }
+
+        .step-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-hover);
+            /* Darker lime */
+            font-family: 'Outfit', sans-serif;
+            background: var(--primary-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .portfolio-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .portfolio-img-wrapper {
+            overflow: hidden;
+            height: 240px;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-content {
+            padding: 25px;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .price-badge {
+            background: var(--accent);
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        /* Pricing Table */
+        .pricing-wrapper {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pricing-table th {
+            text-align: left;
+            padding: 20px;
+            background: var(--primary-dark);
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .pricing-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text);
+        }
+
+        /* Fix for mobile pricing text wrapping */
+        .pricing-table td:nth-child(2) {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 480px) {
+
+            .pricing-table th,
+            .pricing-table td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .pricing-table tr:last-child td {
+            border: none;
+        }
+
+        .pricing-table tr:hover td {
+            background: var(--light);
+        }
+
+        /* Reviews */
+        .review-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--accent);
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .reviewer {
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reviewer::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 30px;
+            background: #cbd5e1;
+            border-radius: 50%;
+        }
+
+        /* FAQ - Accordion */
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 20px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding-bottom: 20px;
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background: var(--primary-dark);
+            color: var(--white);
+            border-radius: 50px 50px 0 0;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 24px;
+            color: var(--text);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary-dark);
+            color: var(--white);
+            border: none;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: #022c22;
+            color: #94a3b8;
+            padding: 80px 0 40px;
+        }
+
+        .footer-heading {
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 20px;
+            font-size: 1.25rem;
+        }
+
+        .footer-links p {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Sticky Bar */
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 12px 20px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .sticky-bar .btn {
+            flex: 1;
+            padding: 12px;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
+
+            .sticky-bar {
+                display: none;
+            }
+
+            .navbar {
+                padding: 25px 0;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .desktop-nav {
+                display: flex;
+            }
+
+            .hero-content {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+
+            .hero-text {
+                flex: 1;
+            }
+
+            .hero-img-container {
+                flex: 1;
+            }
+
+            .hero-btns {
+                flex-direction: row;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .feature-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                height: 100%;
+            }
+
+            .contact-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Moody-Do's Handyman LLC",
+      "image": "assets/hero.webp",
+      "telephone": "+1-817-555-0142",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Glendale",
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      },
+      "priceRange": "$75-$500",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "07:00",
+        "closes": "18:00"
+      },
+      "areaServed": ["Glendale", "Grand Prairie", "Mansfield", "Kennedale", "Burleson", "Fort Worth South", "Dallas Southwest"]
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">Moody-Do's Handyman <span>LLC</span></a>
+
+            <div class="desktop-nav">
+                <a href="#services">Services</a>
+                <a href="#portfolio">Our Work</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Get
+                    Estimate</a>
+            </div>
+
+            <button class="mobile-menu-btn" aria-label="Menu" id="menuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#portfolio" class="mobile-link">Our Work</a>
+        <a href="#reviews" class="mobile-link">Reviews</a>
+        <a href="#faq" class="mobile-link">FAQ</a>
+        <a href="#contact" class="mobile-link" style="color: var(--primary);">Get Estimate</a>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <div class="trust-badges">
+                    <div class="badge">✓ Licensed & Insured</div>
+                    <div class="badge">✓ 10+ Years Exp</div>
+                    <div class="badge">✓ Local Glendale</div>
+                </div>
+                <h1>Trusted Handyman Services in Glendale, AZ</h1>
+                <p>We handle the small jobs the big contractors won't touch. Professional, reliable, and fair pricing
+                    for all your home repair needs.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Get a Free Estimate</a>
+                    <a href="tel:+16025056116" class="btn btn-secondary">Call 602-505-6116</a>
+                </div>
+            </div>
+            <div class="hero-img-container">
+                <img src="assets/hero.webp" alt="Professional Handyman in Glendale" class="hero-img">
+                <div class="floating-card">
+                    <div class="icon-box">★</div>
+                    <div>
+                        <div style="font-size: 0.8rem; opacity: 0.8; font-weight: 400;">Rated 4.9/5</div>
+                        <div>Top Service</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>What We Fix</h2>
+                <p>Small to medium home repairs are our specialty. If it's broken, we can probably fix it.</p>
+            </div>
+            <div class="grid services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Drywall Repair</h3>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Painting</h3>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚪</div>
+                    <h3>Door Repair</h3>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚧</div>
+                    <h3>Fence Repair</h3>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📺</div>
+                    <h3>TV Mounting</h3>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🪑</div>
+                    <h3>Assembly</h3>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Light Fixtures</h3>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚿</div>
+                    <h3>Caulking</h3>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 40px;">
+                <p style="font-size: 0.9rem; color: var(--text-light);">*Licensed specialists required for major
+                    plumbing or electrical work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Simple, transparent, and hassle-free.</p>
+            </div>
+            <div class="grid features-grid">
+                <div class="feature-item">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3 style="margin-bottom: 10px;">Contact Us</h3>
+                        <p>Fill out our form or give us a call. Tell us what needs fixing and share photos if you can.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3 style="margin-bottom: 10px;">Get Assessed</h3>
+                        <p>We'll provide a ballpark estimate or schedule a visit to assess the job in person.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3 style="margin-bottom: 10px;">Job Done</h3>
+                        <p>We arrive on time, complete the work to high standards, and clean up after ourselves.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Recent Projects</h2>
+                <p>See our quality work in homes across Glendale.</p>
+            </div>
+            <div class="grid portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-img-wrapper">
+                        <img src="assets/portfolio-drywall.webp" alt="Drywall Repair" class="portfolio-img">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-tags">
+                            <span class="tag">Repair</span>
+                            <span class="price-badge tag">$150 - $250</span>
+                        </div>
+                        <h3>Drywall Patch & Paint</h3>
+                        <p style="font-size: 0.9rem; margin-top: 8px; color: var(--text-light);">Seamless texture
+                            matching for water damage repair in North Glendale.</p>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-img-wrapper">
+                        <img src="assets/portfolio-fence.webp" alt="Fence Repair" class="portfolio-img">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-tags">
+                            <span class="tag">Outdoor</span>
+                            <span class="price-badge tag">$200 - $350</span>
+                        </div>
+                        <h3>Backyard Fence Repair</h3>
+                        <p style="font-size: 0.9rem; margin-top: 8px; color: var(--text-light);">Replaced rot-damaged
+                            posts and pickets for a sturdy finish.</p>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-img-wrapper">
+                        <img src="assets/portfolio-tv-mount.webp" alt="TV Mounting" class="portfolio-img">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-tags">
+                            <span class="tag">Install</span>
+                            <span class="price-badge tag">$100 - $150</span>
+                        </div>
+                        <h3>Living Room TV Mount</h3>
+                        <p style="font-size: 0.9rem; margin-top: 8px; color: var(--text-light);">Secure mounting on
+                            brick fireplace with hidden wire management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transparent Pricing</h2>
+                <p>We believe in fair, upfront pricing ranges so there are no surprises.</p>
+            </div>
+            <div class="pricing-wrapper">
+                <div style="overflow-x: auto;">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Service Item</th>
+                                <th>Estimated Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Service Call / Minimum</td>
+                                <td>$75 – $100</td>
+                            </tr>
+                            <tr>
+                                <td>Drywall Patch (Small)</td>
+                                <td>$100 – $200</td>
+                            </tr>
+                            <tr>
+                                <td>Door Repair/Replacement</td>
+                                <td>$150 – $400</td>
+                            </tr>
+                            <tr>
+                                <td>TV Mount Installation</td>
+                                <td>$75 – $150</td>
+                            </tr>
+                            <tr>
+                                <td>Furniture Assembly</td>
+                                <td>$75 – $150 / item</td>
+                            </tr>
+                            <tr>
+                                <td>Fence Repair</td>
+                                <td>$100 – $300 / section</td>
+                            </tr>
+                            <tr>
+                                <td>Interior Painting (Per Room)</td>
+                                <td>$200 – $500</td>
+                            </tr>
+                            <tr>
+                                <td>Light Fixture Install</td>
+                                <td>$75 – $125</td>
+                            </tr>
+                            <tr>
+                                <td>Handyman for a Day (6-8 hrs)</td>
+                                <td>$350 – $500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Locals Say</h2>
+                <div style="font-weight: 700; color: var(--primary); font-size: 1.2rem; margin-top: 10px;">4.8 ★ from 63
+                    Google reviews</div>
+            </div>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Moody-Do's Handyman LLC did a fantastic job fixing my fence. They were on
+                        time and the price was exactly what they quoted."</p>
+                    <div class="reviewer">Sarah M. <span style="font-weight: 400; color: #94a3b8;">- Glendale</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Quick and professional TV mounting. Cleaned up everything afterwards. Highly
+                        recommend!"</p>
+                    <div class="reviewer">James T. <span style="font-weight: 400; color: #94a3b8;">- Mansfield</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"I had a list of small repairs and they knocked them all out in one
+                        afternoon. Great value for the quality of work."</p>
+                    <div class="reviewer">Robert L. <span style="font-weight: 400; color: #94a3b8;">- Grand
+                            Prairie</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section bg-white" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Common Questions</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question">Do you offer free estimates?</div>
+                    <div class="faq-answer">Yes, we can provide a free estimate over the phone for simple jobs. For
+                        larger or more complex projects, we can schedule a visit to provide an accurate quote.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are you licensed and insured?</div>
+                    <div class="faq-answer">Absolutely. We are fully insured for liability and carry all necessary local
+                        licenses for general handyman work in the Glendale area.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What areas do you serve?</div>
+                    <div class="faq-answer">We primarily serve Glendale, but we also cover Grand Prairie, Mansfield,
+                        Kennedale, Burleson, Fort Worth South, and Dallas Southwest.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you do plumbing or electrical?</div>
+                    <div class="faq-answer">We handle minor fixtures like faucets, light switches, and ceiling fans. For
+                        major plumbing or electrical panel work, we recommend hiring specialized licensed contractors.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How quickly can you schedule me?</div>
+                    <div class="faq-answer">We often have same-week availability! It depends on our current workload,
+                        but we try our best to fit you in as soon as possible.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you provide a warranty?</div>
+                    <div class="faq-answer">Yes, we stand by our workmanship. If something isn't right with the work we
+                        performed, let us know and we'll come back to fix it.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to get started?</h2>
+                    <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8); margin-bottom: 30px;">Tell us about your
+                        project and we'll get back to you with an estimate.</p>
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="margin-bottom: 10px; color: var(--accent);">Call Us Directly</h3>
+                        <a href="tel:+16025056116"
+                            style="color: var(--white); font-size: 1.5rem; text-decoration: none; font-weight: 700;">602-505-6116</a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" class="form-control" placeholder="John Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" class="form-control" placeholder="602-505-6116" required>
+                    </div>
+                    <div class="form-group">
+                        <label>What needs fixing?</label>
+                        <textarea class="form-control" rows="4" placeholder="Describe your project..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn">Request Estimate</button>
+                    <p style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: #64748b;">No spam. We
+                        only use your info to contact you.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div>
+                    <div class="footer-heading">Moody-Do's Handyman LLC</div>
+                    <p>Your trusted local partner for home maintenance and repairs.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-heading">Service Areas</div>
+                    <p>Glendale</p>
+                    <p>Grand Prairie</p>
+                    <p>Mansfield</p>
+                    <p>Kennedale</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-heading">Hours</div>
+                    <p>Mon - Sat: 7am - 6pm</p>
+                    <p>Sun: Closed</p>
+                </div>
+            </div>
+            <div class="text-center"
+                style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                &copy; 2026 Moody-Do's Handyman LLC. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile Bar -->
+    <div class="sticky-bar">
+        <a href="tel:+16025056116" class="btn btn-primary">Call</a>
+        <a href="#contact" class="btn btn-secondary" style="border: 2px solid #e2e8f0; color: var(--text);">Get
+            Estimate</a>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when clicking a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuBtn.textContent = '☰';
+            });
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                    const answer = item.querySelector('.faq-answer');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

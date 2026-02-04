@@ -52,6 +52,10 @@ Do NOT generate blog pages, popups, chat widgets, or dashboards.
 
 ### Mobile-first (MANDATORY)
 - **Top Navbar**: Logo (Left) + Hamburger Menu (Right).
+- **Logo Handling (CRITICAL)**:
+  - MUST use `display: inline-block` (NOT flex) to allow natural text wrapping.
+  - MUST have `max-width: 80%` on mobile (`max-width: 480px`) to prevent collision with the menu button.
+  - Font size on mobile should be reduced (e.g., `1.1rem`) for long names.
 - **Sticky Bottom Bar**:
   - **Primary Button (Lime)**: "Call"
   - **Secondary Button (White)**: "Get Estimate"
@@ -140,6 +144,15 @@ Must include ALL of the following:
 8. **Footer**
    - NAP, Service Areas, Hours.
    - **Copyright Year**: Always use current year + 2 (e.g., 2026).
+   - **Business Name**: MUST match the full business name (e.g., "Mr Fix It Handyman Services"), not the generic template name.
+
+---
+
+## BATCH GENERATION RULES
+When generating multiple sites from CSV:
+1. **Logo Text**: Split business name to preserve two-tone style (e.g., "King of the **Handyman**").
+2. **Metadata**: Global replacement of business name in Title, Description, and Footer.
+3. **Consistency**: Apply the logo CSS fixes to ALL sites, regardless of name length.
 
 ---
 
