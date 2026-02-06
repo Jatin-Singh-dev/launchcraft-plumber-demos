@@ -118,8 +118,18 @@ async function generateBatch() {
         // Let's replace the Logic text specifically regex
         html = html.replace(/<div>Bur Dubai <span>Dental Clinic<\/span><\/div>/g, `<div>${item.business_name}</div>`);
 
-        // 2. Location
+        // 2. Location (Address)
         html = html.replace(/Bur Dubai, Dubai, UAE/g, item.location);
+
+        // 2b. Location (Headlines/Titles) 
+        // "Premium Dental Care in Bur Dubai" -> "Premium Dental Care in Dubai, UAE" (or similar)
+        // We use a regex to catch the specific phrase
+        html = html.replace(/Premium Dental Care in Bur Dubai/g, `Premium Dental Care in ${item.location}`);
+
+        // 2c. Schema Locality
+        // "addressLocality": "Bur Dubai"
+        const locality = item.location.split(',')[0].trim();
+        html = html.replace(/"addressLocality": "Bur Dubai"/g, `"addressLocality": "${locality}"`);
 
         // 3. Phone (Display)
         html = html.replace(/\+971 50 123 4567/g, displayPhone);
@@ -132,6 +142,28 @@ async function generateBatch() {
 
         // Write file
         fs.writeFileSync(path.join(targetDir, 'index.html'), html);
+
+        // 5. PATCH MAIN.JS (Dynamic Translation Fix)
+        // Requires reading the JS file from target (already copied), replacing the hardcoded string, and saving.
+        const targetJsPath = path.join(targetDir, 'assets', 'js', 'main.js');
+        if (fs.existsSync(targetJsPath)) {
+            let jsContent = fs.readFileSync(targetJsPath, 'utf-8');
+            // Regex to find "heroHeadline": "Premium Dental Care in Bur Dubai"
+            // We want to replace it with item.location
+            // NOTE: The main.js has keys like: heroHeadline: "Premium Dental Care in Bur Dubai",
+
+            // Fix English Headline
+            jsContent = jsContent.replace(
+                /heroHeadline:\s*"Premium Dental Care in Bur Dubai"/g,
+                `heroHeadline: "Premium Dental Care in ${item.location}"`
+            );
+
+            // Fix Arabic Headline (Optional: Just replace Bur Dubai with Dubai or generic if we can't translate)
+            // Current arabic: "رعاية أسنان متميزة في بر دبي"
+            // We'll leave it or basic patch if possible. For now, key focus is English.
+
+            fs.writeFileSync(targetJsPath, jsContent);
+        }
     }
 
     console.log('Batch generation complete.');

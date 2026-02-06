@@ -6,7 +6,7 @@ const translations = {
         doctors: "Doctors",
         reviews: "Reviews",
         contact: "Contact",
-        heroHeadline: "Premium Dental Care in Bur Dubai",
+        heroHeadline: "Premium Dental Care in Bur Dubai, Dubai, UAE",
         heroSub: "Experience world-class dentistry with a gentle touch. DHA-certified experts dedicated to your perfect smile.",
         bookBtn: "Book Appointment",
         callBtn: "Call Now",
